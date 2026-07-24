@@ -29,7 +29,7 @@ export function PageHero({ title, description, eyebrow }: PageHeroProps) {
             href="/contact"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "bg-gold text-navy-deep hover:bg-gold/90",
+              "bg-gradient-to-b from-gold to-[#b38e1e] text-navy-deep font-semibold shadow-[0_0_20px_rgba(201,162,39,0.3)] hover:shadow-[0_0_30px_rgba(201,162,39,0.5)] hover:-translate-y-0.5 border border-gold/50 transition-all duration-300",
             )}
           >
             Send inquiry
@@ -40,7 +40,7 @@ export function PageHero({ title, description, eyebrow }: PageHeroProps) {
             rel="noopener noreferrer"
             className={cn(
               buttonVariants({ variant: "outline", size: "lg" }),
-              "border-white/25 bg-transparent text-white hover:bg-white/10 hover:text-white",
+              "border-white/40 bg-white/5 text-white backdrop-blur-md shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:bg-white/15 hover:border-white/60 hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 transition-all duration-300",
             )}
           >
             WhatsApp {siteConfig.phone}
