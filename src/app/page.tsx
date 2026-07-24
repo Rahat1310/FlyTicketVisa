@@ -8,7 +8,7 @@ import { CountryGrid } from "@/components/CountryGrid";
 import { SectionHeading } from "@/components/SectionHeading";
 import { LightSection } from "@/components/LightSection";
 import { CTABanner } from "@/components/CTABanner";
-import { FadeIn } from "@/components/Animations";
+import { FadeIn, TypewriterGroup, TypewriterPart } from "@/components/Animations";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -55,10 +55,14 @@ export default function HomePage() {
                 aria-hidden
               />
 
-              <h1 className="animate-hero-brand mt-6 text-3xl font-light leading-snug tracking-wide text-balance text-white sm:text-4xl md:text-5xl lg:text-6xl">
-                Your journey starts here — from{" "}
-                <span className="font-medium text-gold">Bangladesh</span> to the{" "}
-                <span className="font-medium text-gold">world.</span>
+              <h1 className="animate-hero-brand mt-6 text-3xl font-light leading-snug tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
+                Your journey starts here —<br className="hidden md:block" />{" "}
+                <TypewriterGroup delay={0.8} speed={0.04}>
+                  <TypewriterPart text="from " />
+                  <TypewriterPart text="Bangladesh" className="font-medium text-gold" />
+                  <TypewriterPart text=" to the " />
+                  <TypewriterPart text="world." className="font-medium text-gold" />
+                </TypewriterGroup>
               </h1>
 
               <p className="animate-fade-up-delay-2 mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">

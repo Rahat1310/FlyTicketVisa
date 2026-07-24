@@ -171,12 +171,10 @@
   from {
     opacity: 0;
     transform: translateY(28px) scale(0.96);
-    letter-spacing: 0.08em;
   }
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
-    letter-spacing: -0.02em;
   }
 }
 

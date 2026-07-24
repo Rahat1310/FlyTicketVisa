@@ -59,3 +59,44 @@ export function AnimatedText({ text, className, delay = 0 }: { text: string; cla
     </motion.span>
   );
 }
+
+export function TypewriterGroup({ children, className, delay = 0, speed = 0.04 }: { children: ReactNode; className?: string; delay?: number; speed?: number }) {
+  return (
+    <motion.span
+      className={className}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={{
+        visible: { transition: { staggerChildren: speed, delayChildren: delay } },
+        hidden: {},
+      }}
+    >
+      {children}
+    </motion.span>
+  );
+}
+
+export function TypewriterPart({ text, className }: { text: string; className?: string }) {
+  return (
+    <span className={className}>
+      {text.split("").map((char, index) => (
+        <motion.span
+          key={index}
+          className="inline-block"
+          variants={{
+            hidden: { opacity: 0, filter: "blur(4px)", y: 2 },
+            visible: { 
+              opacity: 1, 
+              filter: "blur(0px)", 
+              y: 0,
+              transition: { duration: 0.2, ease: "easeOut" }
+            },
+          }}
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
