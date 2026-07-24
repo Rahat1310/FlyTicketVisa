@@ -17,7 +17,7 @@ const visaServices = [
 
 const navLinks = [
   { href: "/services/air-ticket", label: "Air Ticket" },
-  { href: "/countries/uk", label: "Countries" },
+  { href: "/countries", label: "Countries" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ] as const;

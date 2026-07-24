@@ -91,12 +91,12 @@ More countries added post-launch using the same country-page template.
 - Mobile-first Tailwind; test at 375px width minimum
 
 ## 9. Build Order (see full roadmap — build one phase at a time, review before moving on)
-1. Scaffold + infra accounts
-2. IA + wireframes
-3. Core pages (static content first)
-4. Sanity CMS wiring
-5. Lead system + admin dashboard
-6. Trust/i18n/SEO polish
+1. Scaffold + infra accounts — done
+2. IA + wireframes — done (static IA via pages)
+3. Core pages (static content first) — done
+4. Sanity CMS wiring — pending (needs SANITY_* env)
+5. Lead system + admin dashboard — inquiry form done; Clerk admin pending env
+6. Trust/i18n/SEO polish — SEO/sitemap/robots done; next-intl pending
 7. QA + launch
 8. Post-launch content expansion
 

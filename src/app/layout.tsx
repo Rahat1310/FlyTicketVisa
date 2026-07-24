@@ -17,11 +17,25 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://flyticketvisa.com",
+  ),
   title: {
     default: `${siteConfig.name} | Visa & Air Ticket Agency Bangladesh`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  openGraph: {
+    title: `${siteConfig.name} | Visa & Air Ticket Agency Bangladesh`,
+    description: siteConfig.description,
+    locale: "en_BD",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteConfig.name}`,
+    description: siteConfig.description,
+  },
 };
 
 export default function RootLayout({

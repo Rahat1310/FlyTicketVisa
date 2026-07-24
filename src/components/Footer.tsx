@@ -51,8 +51,13 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/countries/uk" className="hover:text-white">
+              <Link href="/countries" className="hover:text-white">
                 Country visas
+              </Link>
+            </li>
+            <li>
+              <Link href="/services" className="hover:text-white">
+                All services
               </Link>
             </li>
           </ul>

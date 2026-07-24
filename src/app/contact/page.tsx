@@ -1,33 +1,43 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/PageHero";
+import { CompactHero } from "@/components/CompactHero";
 import { InquiryForm } from "@/components/InquiryForm";
+import { LightSection } from "@/components/LightSection";
 import { siteConfig, getWhatsAppUrl } from "@/lib/site";
 import { MessageCircle, Phone, MapPin, Mail } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Contact / Inquiry",
   description:
-    "Send a visa or air ticket inquiry. Reach us on WhatsApp, phone, or visit our Dhaka office.",
+    "Send a visa or air ticket inquiry. Reach us on WhatsApp, phone, or visit our office.",
 };
 
-export default function ContactPage() {
+type Props = {
+  searchParams: Promise<{ service?: string; country?: string; countrySlug?: string }>;
+};
+
+export default async function ContactPage({ searchParams }: Props) {
+  const params = await searchParams;
+
   return (
     <>
-      <PageHero
+      <CompactHero
         eyebrow="Contact"
         title="Tell us where you want to go"
         description="Share your service, country, and dates. We reply with requirements, fees, and a realistic timeline."
       />
 
-      <section className="py-14 sm:py-16">
-        <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr]">
+      <LightSection>
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <h2 className="font-display text-2xl text-navy">Inquiry form</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Submits via WhatsApp for now. Database + email alerts come in a later phase.
+              Your inquiry is saved to our system and emailed to our team.
             </p>
             <div className="mt-8">
-              <InquiryForm />
+              <InquiryForm
+                defaultService={params.service ?? ""}
+                defaultCountry={params.country ?? ""}
+              />
             </div>
           </div>
 
@@ -83,7 +93,7 @@ export default function ContactPage() {
             </div>
           </aside>
         </div>
-      </section>
+      </LightSection>
     </>
   );
 }

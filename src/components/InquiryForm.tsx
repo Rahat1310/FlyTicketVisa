@@ -1,57 +1,103 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState, useTransition, type FormEvent } from "react";
+import { CheckCircle2, MessageCircle } from "lucide-react";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { submitInquiry } from "@/lib/actions/inquiry";
 import { services } from "@/lib/services";
-import { countries } from "@/lib/countries";
+import { countries } from "@/lib/data/countries";
 import { getWhatsAppUrl, siteConfig } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
-export function InquiryForm() {
+type InquiryFormProps = {
+  defaultService?: string;
+  defaultCountry?: string;
+};
+
+export function InquiryForm({
+  defaultService = "",
+  defaultCountry = "",
+}: InquiryFormProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [submittedService, setSubmittedService] = useState("");
+  const [error, setError] = useState("");
+  const [isPending, startTransition] = useTransition();
+
   const [name, setName] = useState("");
-  const [contact, setContact] = useState("");
-  const [service, setService] = useState("");
-  const [country, setCountry] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [service, setService] = useState(defaultService);
+  const [country, setCountry] = useState(defaultCountry);
   const [message, setMessage] = useState("");
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // Phase 5 will wire Neon/Prisma + Resend. For now, open WhatsApp with the inquiry.
-    const waMessage = [
-      `New inquiry from ${name || "client"}`,
-      `Contact: ${contact}`,
-      service ? `Service: ${service}` : null,
-      country ? `Country: ${country}` : null,
-      message ? `Message: ${message}` : null,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    setError("");
 
-    window.open(getWhatsAppUrl(waMessage), "_blank", "noopener,noreferrer");
-    setSubmitted(true);
+    startTransition(async () => {
+      const result = await submitInquiry({
+        name,
+        phone,
+        email: email || undefined,
+        service,
+        country: country || undefined,
+        message: message || undefined,
+      });
+
+      if (!result.ok) {
+        setError(result.error);
+        return;
+      }
+
+      setSubmittedService(result.service);
+      setSubmitted(true);
+    });
   }
 
   if (submitted) {
+    const waMessage = `Hi, I just submitted an inquiry about ${submittedService}`;
     return (
-      <div className="rounded-2xl border border-teal/30 bg-teal/5 p-8 text-center">
-        <CheckCircle2 className="mx-auto size-10 text-teal" />
-        <h3 className="mt-4 font-display text-2xl text-navy">Inquiry started</h3>
-        <p className="mt-2 text-sm text-muted-foreground">
-          WhatsApp should open with your details. If it didn&apos;t, call{" "}
+      <div className="rounded-2xl border border-teal/25 bg-card p-8 text-center shadow-[0_20px_60px_-20px_rgba(20,82,82,0.15)]">
+        <CheckCircle2 className="mx-auto size-12 text-teal" />
+        <h3 className="mt-4 font-display text-2xl text-navy">Inquiry received</h3>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          Thank you, {name}. We&apos;ve saved your details and sent a notification to our
+          team. For a faster reply, message us on WhatsApp.
+        </p>
+        <a
+          href={getWhatsAppUrl(waMessage)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={cn(
+            buttonVariants({ size: "lg" }),
+            "mt-6 inline-flex gap-2 bg-[#25D366] text-white hover:bg-[#20bd5a]",
+          )}
+        >
+          <MessageCircle className="size-5" />
+          Continue on WhatsApp
+        </a>
+        <p className="mt-4 text-xs text-muted-foreground">
+          Or call{" "}
           <a href={siteConfig.phoneHref} className="font-medium text-teal">
             {siteConfig.phone}
           </a>
-          .
         </p>
         <Button
           type="button"
           variant="outline"
           className="mt-6"
-          onClick={() => setSubmitted(false)}
+          onClick={() => {
+            setSubmitted(false);
+            setName("");
+            setPhone("");
+            setEmail("");
+            setService(defaultService);
+            setCountry(defaultCountry);
+            setMessage("");
+          }}
         >
           Send another inquiry
         </Button>
@@ -60,89 +106,109 @@ export function InquiryForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="grid gap-5 sm:grid-cols-2">
+    <div className="rounded-2xl border border-border bg-card p-6 shadow-[0_20px_60px_-20px_rgba(20,82,82,0.12)] sm:p-8">
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="grid gap-5 sm:grid-cols-2">
+          <div className="space-y-2">
+            <Label htmlFor="name">Full name</Label>
+            <Input
+              id="name"
+              name="name"
+              required
+              placeholder="Your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="phone">Phone</Label>
+            <Input
+              id="phone"
+              name="phone"
+              required
+              placeholder="+880 1XXX-XXXXXX"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+        </div>
+
         <div className="space-y-2">
-          <Label htmlFor="name">Full name</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
-            id="name"
-            name="name"
-            required
-            placeholder="Your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            id="email"
+            name="email"
+            type="email"
+            placeholder="you@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
+
+        <div className="grid gap-5 sm:grid-cols-2">
+          <div className="space-y-2">
+            <Label htmlFor="service">Service</Label>
+            <select
+              id="service"
+              name="service"
+              required
+              value={service}
+              onChange={(e) => setService(e.target.value)}
+              className="border-input bg-background h-9 w-full rounded-md border px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+            >
+              <option value="">Select a service</option>
+              {services.map((s) => (
+                <option key={s.slug} value={s.title}>
+                  {s.title}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="country">Country (optional)</Label>
+            <select
+              id="country"
+              name="country"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              className="border-input bg-background h-9 w-full rounded-md border px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+            >
+              <option value="">Select a country</option>
+              {countries.map((c) => (
+                <option key={c.slug} value={c.name}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
         <div className="space-y-2">
-          <Label htmlFor="contact">Phone / WhatsApp</Label>
-          <Input
-            id="contact"
-            name="contact"
-            required
-            placeholder="+880 1XXX-XXXXXX"
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
+          <Label htmlFor="message">Message</Label>
+          <Textarea
+            id="message"
+            name="message"
+            rows={4}
+            placeholder="Travel dates, destination, or any questions…"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
           />
         </div>
-      </div>
 
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div className="space-y-2">
-          <Label htmlFor="service">Service</Label>
-          <select
-            id="service"
-            name="service"
-            required
-            value={service}
-            onChange={(e) => setService(e.target.value)}
-            className="border-input bg-background h-9 w-full rounded-md border px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
-          >
-            <option value="">Select a service</option>
-            {services.map((s) => (
-              <option key={s.slug} value={s.title}>
-                {s.title}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="space-y-2">
-          <Label htmlFor="country">Country (optional)</Label>
-          <select
-            id="country"
-            name="country"
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
-            className="border-input bg-background h-9 w-full rounded-md border px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
-          >
-            <option value="">Select a country</option>
-            {countries.map((c) => (
-              <option key={c.slug} value={c.name}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
+        {error ? (
+          <p className="rounded-md border border-destructive/30 bg-destructive/5 px-3 py-2 text-sm text-destructive">
+            {error}
+          </p>
+        ) : null}
 
-      <div className="space-y-2">
-        <Label htmlFor="message">Message</Label>
-        <Textarea
-          id="message"
-          name="message"
-          rows={4}
-          placeholder="Travel dates, destination, or any questions…"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-      </div>
-
-      <Button type="submit" className="w-full bg-teal hover:bg-teal/90 sm:w-auto">
-        Submit inquiry via WhatsApp
-      </Button>
-      <p className="text-xs text-muted-foreground">
-        Lead storage & email alerts come in a later phase. Right now this opens WhatsApp
-        with your message for a fast response.
-      </p>
-    </form>
+        <Button
+          type="submit"
+          disabled={isPending}
+          className="w-full bg-gold text-navy-deep hover:bg-gold/90 sm:w-auto"
+        >
+          {isPending ? "Submitting…" : "Submit inquiry"}
+        </Button>
+      </form>
+    </div>
   );
 }

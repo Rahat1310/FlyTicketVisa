@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
-import { PageHero } from "@/components/PageHero";
-import { CountryGrid } from "@/components/CountryGrid";
+import { CompactHero } from "@/components/CompactHero";
+import { LightSection } from "@/components/LightSection";
+import { CountryCard } from "@/components/CountryCard";
+import { CTABanner } from "@/components/CTABanner";
+import { SectionHeading } from "@/components/SectionHeading";
 import { buttonVariants } from "@/components/ui/button";
 import { getServiceBySlug, services } from "@/lib/services";
-import { getCountriesBySlugs } from "@/lib/countries";
-import { getWhatsAppUrl } from "@/lib/site";
+import { getCountriesBySlugs } from "@/lib/data/countries";
 import { cn } from "@/lib/utils";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -35,17 +37,21 @@ export default async function ServicePage({ params }: Props) {
 
   return (
     <>
-      <PageHero
-        eyebrow="Service"
+      <CompactHero
+        eyebrow="Visa service"
         title={service.title}
         description={service.description}
       />
 
-      <section className="py-14 sm:py-16">
-        <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-2">
+      <LightSection>
+        <div className="grid gap-12 lg:grid-cols-2">
           <div>
-            <h2 className="font-display text-2xl text-navy">What you get</h2>
-            <ul className="mt-6 space-y-3">
+            <SectionHeading
+              eyebrow="Process"
+              title="What's included"
+              description="End-to-end support from checklist to submission."
+            />
+            <ul className="mt-8 space-y-3">
               {service.highlights.map((item) => (
                 <li key={item} className="flex gap-3 text-sm text-navy/85">
                   <Check className="mt-0.5 size-4 shrink-0 text-teal" />
@@ -53,16 +59,12 @@ export default async function ServicePage({ params }: Props) {
                 </li>
               ))}
             </ul>
-            <div className="mt-8">
-              <a
-                href={getWhatsAppUrl(`Assalamu alaikum. I need help with: ${service.title}`)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(buttonVariants(), "bg-teal hover:bg-teal/90")}
-              >
-                {service.cta}
-              </a>
-            </div>
+            <Link
+              href={`/contact?service=${encodeURIComponent(service.title)}`}
+              className={cn(buttonVariants(), "mt-8 bg-gold text-navy-deep hover:bg-gold/90")}
+            >
+              {service.cta}
+            </Link>
           </div>
 
           <div className="rounded-2xl border border-border bg-card p-6 sm:p-8">
@@ -80,56 +82,47 @@ export default async function ServicePage({ params }: Props) {
                 </li>
               ))}
             </ul>
-            <Link
-              href="/contact"
-              className="mt-6 inline-block text-sm font-medium text-teal hover:underline"
-            >
-              Prefer a full inquiry form →
-            </Link>
           </div>
         </div>
-      </section>
+      </LightSection>
 
       {related.length > 0 ? (
-        <section className="border-t border-border bg-mist/40 py-14 sm:py-16">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <h2 className="font-display text-2xl text-navy sm:text-3xl">
-              Related countries
-            </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Open a country page for documents, fees, and processing time.
-            </p>
-            <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((country) => (
-                <Link
-                  key={country.slug}
-                  href={`/countries/${country.slug}`}
-                  className="flex items-center gap-4 rounded-xl border border-border bg-card px-4 py-4 transition-colors hover:border-teal/40"
-                >
-                  <span className="text-3xl" aria-hidden>
-                    {country.flag}
-                  </span>
-                  <div>
-                    <p className="font-medium text-navy">{country.name}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {country.processingTime}
-                    </p>
-                  </div>
-                </Link>
-              ))}
-            </div>
+        <LightSection bordered>
+          <SectionHeading
+            eyebrow="Destinations"
+            title="Countries for this service"
+            description="Open a country page for documents, fees, and processing time."
+          />
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {related.map((country) => (
+              <CountryCard key={country.slug} country={country} />
+            ))}
           </div>
-        </section>
+        </LightSection>
       ) : (
-        <section className="border-t border-border bg-mist/40 py-14">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <h2 className="font-display text-2xl text-navy">Popular destinations</h2>
-            <div className="mt-8">
-              <CountryGrid limit={6} />
-            </div>
+        <LightSection bordered>
+          <SectionHeading
+            eyebrow="Destinations"
+            title="Popular countries"
+            description="We help with visas and tickets worldwide."
+          />
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {getCountriesBySlugs(["uae", "malaysia", "uk", "saudi-arabia", "thailand", "canada"]).map(
+              (country) => (
+                <CountryCard key={country.slug} country={country} />
+              ),
+            )}
           </div>
-        </section>
+        </LightSection>
       )}
+
+      <CTABanner
+        title={`Ready for ${service.shortTitle}?`}
+        description="Send an inquiry and we'll reply with a clear checklist and timeline."
+        primaryLabel="Start an inquiry"
+        primaryHref={`/contact?service=${encodeURIComponent(service.title)}`}
+        showAddress={false}
+      />
     </>
   );
 }
