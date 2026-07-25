@@ -284,9 +284,6 @@ export default function CantonFairPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-3 text-sm">
-              <span className="inline-flex items-center gap-2 rounded-full bg-teal/10 px-4 py-1.5 font-medium text-teal">
-                <Calendar className="size-3.5" /> Spring: Apr – May
-              </span>
               <span className="inline-flex items-center gap-2 rounded-full bg-gold/10 px-4 py-1.5 font-medium text-[#b38e1e]">
                 <Calendar className="size-3.5" /> Autumn: Oct – Nov
               </span>
@@ -300,11 +297,6 @@ export default function CantonFairPage() {
                   <tr className="border-b border-border bg-navy text-white">
                     <th className="px-5 py-4 text-left font-semibold tracking-wide">
                       Phase
-                    </th>
-                    <th className="px-5 py-4 text-left font-semibold tracking-wide">
-                      <span className="flex items-center gap-2">
-                        <Calendar className="size-3.5 text-teal" /> Spring Dates
-                      </span>
                     </th>
                     <th className="px-5 py-4 text-left font-semibold tracking-wide">
                       <span className="flex items-center gap-2">
@@ -330,7 +322,6 @@ export default function CantonFairPage() {
                           {row.phase}
                         </span>
                       </td>
-                      <td className="px-5 py-4 font-medium text-teal">{row.spring}</td>
                       <td className="px-5 py-4 font-medium text-[#b38e1e]">
                         {row.autumn}
                       </td>
