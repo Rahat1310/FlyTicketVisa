@@ -13,12 +13,14 @@ import withBundleAnalyzer from "@next/bundle-analyzer";
  */
 const ContentSecurityPolicy = [
   "default-src 'self'",
-  // Next.js + Clerk + Vercel analytics. 'unsafe-inline'/'unsafe-eval' kept for Next runtime + Clerk widgets.
+  // Next.js + Clerk + Vercel analytics + Google Analytics / GTM
   [
     "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
     "https://*.clerk.accounts.dev",
     "https://*.clerk.com",
     "https://va.vercel-scripts.com",
+    "https://www.googletagmanager.com",
+    "https://www.google-analytics.com",
   ].join(" "),
   "style-src 'self' 'unsafe-inline'",
   [
@@ -29,6 +31,9 @@ const ContentSecurityPolicy = [
     "https://www.google.com",
     "https://maps.gstatic.com",
     "https://*.googleapis.com",
+    "https://www.googletagmanager.com",
+    "https://www.google-analytics.com",
+    "https://*.doubleclick.net",
   ].join(" "),
   "font-src 'self' data:",
   [
@@ -40,6 +45,9 @@ const ContentSecurityPolicy = [
     "https://va.vercel-scripts.com",
     "https://vitals.vercel-insights.com",
     "https://*.blob.vercel-storage.com",
+    "https://www.google-analytics.com",
+    "https://analytics.google.com",
+    "https://stats.g.doubleclick.net",
   ].join(" "),
   [
     "frame-src 'self'",
@@ -47,6 +55,7 @@ const ContentSecurityPolicy = [
     "https://maps.google.com",
     "https://*.clerk.accounts.dev",
     "https://*.clerk.com",
+    "https://www.googletagmanager.com",
   ].join(" "),
   "worker-src 'self' blob:",
   "object-src 'none'",
@@ -55,7 +64,6 @@ const ContentSecurityPolicy = [
   "frame-ancestors 'self'",
   "upgrade-insecure-requests",
 ].join("; ");
-
 const securityHeaders = [
   {
     key: "Content-Security-Policy",
