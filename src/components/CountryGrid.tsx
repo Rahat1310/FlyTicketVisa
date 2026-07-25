@@ -12,17 +12,21 @@ import { cn } from "@/lib/utils";
 export function CountryGrid({ limit }: { limit?: number }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const list = limit ? countries.slice(0, limit) : countries;
-  
-  const mobileLimit = 8;
-  const showExpandButton = list.length > mobileLimit;
-
   return (
     <div className="flex flex-col">
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-3 lg:grid-cols-3">
+      <div className="grid gap-3 sm:gap-6 grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 lg:gap-8">
         {list.map((country, i) => {
-          const isHiddenOnMobile = !isExpanded && i >= mobileLimit;
+          let visibilityClass = "";
+          if (!isExpanded) {
+            if (i >= 6) {
+              visibilityClass = "hidden";
+            } else if (i >= 4) {
+              visibilityClass = "hidden sm:block";
+            }
+          }
+
           return (
-            <div key={country.slug} className={cn("h-full", isHiddenOnMobile && "hidden sm:block")}>
+            <div key={country.slug} className={cn("h-full", visibilityClass)}>
               <FadeIn delay={i * 0.1} className="h-full">
                 <CountryCard country={country} />
               </FadeIn>
@@ -31,13 +35,18 @@ export function CountryGrid({ limit }: { limit?: number }) {
         })}
       </div>
 
-      {showExpandButton && (
-        <div className="mt-8 flex flex-col items-center gap-4 sm:hidden">
+      {list.length > 4 && (
+        <div
+          className={cn(
+            "mt-10 flex flex-col items-center gap-4",
+            list.length <= 6 && !isExpanded && "sm:hidden"
+          )}
+        >
           <Button
             variant="outline"
             size="lg"
             onClick={() => setIsExpanded(!isExpanded)}
-            className="w-full text-navy-deep border-border/80"
+            className="w-full sm:w-auto min-w-[200px] text-navy-deep border-border/80 bg-white"
           >
             {isExpanded ? (
               <>
@@ -45,7 +54,7 @@ export function CountryGrid({ limit }: { limit?: number }) {
               </>
             ) : (
               <>
-                Show more countries <ChevronDown className="ml-2 size-4" />
+                See more <ChevronDown className="ml-2 size-4" />
               </>
             )}
           </Button>

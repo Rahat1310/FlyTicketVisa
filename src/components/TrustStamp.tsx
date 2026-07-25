@@ -9,8 +9,6 @@ type TrustItem = {
 };
 
 const defaultItems: TrustItem[] = [
-  { icon: BadgeCheck, label: "ATAB member", value: siteConfig.trust.atab },
-  { icon: Shield, label: "Trade license", value: siteConfig.trust.tradeLicense },
   { icon: MapPin, label: "Office", value: siteConfig.address.lines[0] },
 ];
 
@@ -21,7 +19,7 @@ type TrustStampProps = {
 
 export function TrustStamp({ items = defaultItems, className }: TrustStampProps) {
   return (
-    <div className={cn("grid gap-4 sm:grid-cols-3", className)}>
+    <div className={cn("grid gap-4", items.length > 1 ? "sm:grid-cols-3" : "max-w-sm mx-auto", className)}>
       {items.map((item) => (
         <div
           key={item.label}

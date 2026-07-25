@@ -108,7 +108,7 @@ export default async function CountryPage({ params }: Props) {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-hero-atmosphere py-14 text-white sm:py-16">
+      <section className="relative overflow-hidden bg-hero-atmosphere pb-14 pt-24 text-white sm:pb-16 sm:pt-28">
         <div className="pointer-events-none absolute inset-0 bg-section-pattern-dark opacity-60" aria-hidden />
         <div className="relative container-fluid">
           <div className="flex flex-wrap items-center gap-2">

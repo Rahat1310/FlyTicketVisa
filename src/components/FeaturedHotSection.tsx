@@ -38,12 +38,12 @@ export function FeaturedHotSection() {
           package (invitation, M-visa, flights & hotels).
         </p>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
+        <div className="mt-8 grid grid-cols-2 gap-3 md:gap-4">
           <Link
             href="/countries/china"
-            className="group flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-5 rounded-2xl border border-white/15 bg-white/5 p-5 transition-all hover:border-gold/50 hover:bg-white/10"
+            className="group flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-5 rounded-2xl border border-white/15 bg-white/5 p-4 md:p-5 transition-all hover:border-gold/50 hover:bg-white/10"
           >
-            <div className="relative flex h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 border-gold/40">
+            <div className="relative flex h-10 w-10 md:h-14 md:w-14 shrink-0 overflow-hidden rounded-full border-2 border-gold/40">
               <SiteImage
                 src={getCountryFlagUrl("china")}
                 alt="China flag"
@@ -56,31 +56,31 @@ export function FeaturedHotSection() {
               <p className="text-xs font-bold uppercase tracking-wider text-gold">
                 Visa
               </p>
-              <p className="mt-1 font-display text-xl text-white">China Visa</p>
-              <p className="mt-1 text-sm text-white/60">
+              <p className="mt-1 font-display text-base md:text-xl text-white">China Visa</p>
+              <p className="mt-1 text-[11px] md:text-sm leading-tight text-white/60">
                 Documents checklist · delivery in 2–3 weeks
               </p>
             </div>
-            <ArrowRight className="size-5 shrink-0 text-gold transition-transform group-hover:translate-x-1 md:ml-auto" />
+            <ArrowRight className="size-4 md:size-5 shrink-0 text-gold transition-transform group-hover:translate-x-1 md:ml-auto" />
           </Link>
 
           <Link
             href="/canton-fair"
-            className="group flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-5 rounded-2xl border border-gold/40 bg-gold/10 p-5 transition-all hover:border-gold hover:bg-gold/15"
+            className="group flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-5 rounded-2xl border border-gold/40 bg-gold/10 p-4 md:p-5 transition-all hover:border-gold hover:bg-gold/15"
           >
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gold text-navy-deep">
-              <Flame className="size-7" />
+            <div className="flex h-10 w-10 md:h-14 md:w-14 shrink-0 items-center justify-center rounded-[0.85rem] md:rounded-2xl bg-gold text-navy-deep">
+              <Flame className="size-5 md:size-7" />
             </div>
             <div className="min-w-0 flex-1">
               <p className="text-xs font-bold uppercase tracking-wider text-gold">
                 Fair package
               </p>
-              <p className="mt-1 font-display text-xl text-white">Canton Fair</p>
-              <p className="mt-1 text-sm text-white/60">
+              <p className="mt-1 font-display text-base md:text-xl text-white">Canton Fair</p>
+              <p className="mt-1 text-[11px] md:text-sm leading-tight text-white/60">
                 Invitation · China M-visa · flights & hotels
               </p>
             </div>
-            <ArrowRight className="size-5 shrink-0 text-gold transition-transform group-hover:translate-x-1 md:ml-auto" />
+            <ArrowRight className="size-4 md:size-5 shrink-0 text-gold transition-transform group-hover:translate-x-1 md:ml-auto" />
           </Link>
         </div>
 

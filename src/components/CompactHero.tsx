@@ -12,7 +12,7 @@ export function CompactHero({ eyebrow, title, description, className }: CompactH
   return (
     <section
       className={cn(
-        "relative overflow-hidden bg-hero-atmosphere py-14 text-white sm:py-16",
+        "relative overflow-hidden bg-hero-atmosphere pb-14 pt-24 text-white sm:pb-16 sm:pt-28",
         className,
       )}
     >

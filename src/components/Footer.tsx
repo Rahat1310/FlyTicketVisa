@@ -45,9 +45,6 @@ export function Footer() {
           <p className="mt-3 text-sm leading-relaxed text-white/65">
             {siteConfig.tagline}
           </p>
-          <p className="mt-4 text-xs text-white/45">
-            ATAB {siteConfig.trust.atab} · Trade License {siteConfig.trust.tradeLicense}
-          </p>
         </div>
 
         <FooterNavColumn title="Services">

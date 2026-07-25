@@ -180,7 +180,7 @@ export default function CantonFairPage() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="relative overflow-hidden bg-hero-atmosphere py-20 text-white sm:py-28">
+      <section className="relative overflow-hidden bg-hero-atmosphere pb-20 pt-28 text-white sm:pb-28 sm:pt-36">
         <div
           className="pointer-events-none absolute inset-0 bg-section-pattern-dark opacity-50"
           aria-hidden

@@ -50,9 +50,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} ${fraunces.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${plusJakarta.variable} ${fraunces.variable} antialiased`}
     >
-      <body className="flex min-h-full flex-col font-sans">
+      <body className="flex min-h-[100dvh] flex-col font-sans" suppressHydrationWarning>
         <AppProviders>
           <Header />
           <main className="flex-1">{children}</main>

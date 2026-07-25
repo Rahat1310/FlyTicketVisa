@@ -3,7 +3,7 @@ import { ArrowRight, Plane } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { SiteImage } from "@/components/SiteImage";
 import { ServiceGrid } from "@/components/ServiceGrid";
-import { TrustStamp } from "@/components/TrustStamp";
+
 import { CountryGrid } from "@/components/CountryGrid";
 import { SectionHeading } from "@/components/SectionHeading";
 import { LightSection } from "@/components/LightSection";
@@ -98,12 +98,7 @@ export default function HomePage() {
 
       <FeaturedHotSection />
 
-      <section className="relative border-b border-border bg-section-atmosphere py-10">
-        <div className="pointer-events-none absolute inset-0 bg-section-pattern" aria-hidden />
-        <div className="relative container-fluid">
-          <TrustStamp />
-        </div>
-      </section>
+
 
       <LightSection id="services">
         <FadeIn>
