@@ -1,12 +1,11 @@
 "use server";
 
 import { put } from "@vercel/blob";
+import { documentTypeSchema, uploadTokenSchema } from "@/lib/api-schemas";
 import { getLeadByUploadToken } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { sendDocumentsUploadedNotification } from "@/lib/email";
 import {
-  DOCUMENT_TYPES,
-  type DocumentType,
   MAX_UPLOADS_PER_LEAD,
   MAX_UPLOAD_BYTES,
   isAllowedMimeType,
@@ -23,8 +22,6 @@ export type UploadDocumentResult =
       };
     }
   | { ok: false; error: string };
-
-const ALLOWED_TYPES = new Set(DOCUMENT_TYPES.map((t) => t.value)) as Set<string>;
 
 /** Simple per-token rate limit (in-memory; best-effort on serverless). */
 const uploadHits = new Map<string, { count: number; windowStart: number }>();
@@ -47,62 +44,44 @@ export async function uploadDocument(
   token: string,
   formData: FormData,
 ): Promise<UploadDocumentResult> {
-  if (!token?.trim()) {
+  const tokenParsed = uploadTokenSchema.safeParse(token);
+  if (!tokenParsed.success) {
+    console.warn("uploadDocument invalid token shape:", tokenParsed.error.flatten());
     return { ok: false, error: "Invalid upload link." };
   }
+  const safeToken = tokenParsed.data;
 
-  if (!checkRateLimit(token)) {
+  if (!checkRateLimit(safeToken)) {
     return {
       ok: false,
       error: "Too many uploads. Please wait a minute and try again.",
     };
   }
 
-  if (!process.env.DATABASE_URL) {
+  if (!process.env.DATABASE_URL || !process.env.BLOB_READ_WRITE_TOKEN) {
     return {
       ok: false,
-      error: "Document storage is not configured yet. Please send files via WhatsApp.",
+      error:
+        "Document storage is not configured yet. Please send files via WhatsApp.",
     };
   }
 
-  if (!process.env.BLOB_READ_WRITE_TOKEN) {
-    return {
-      ok: false,
-      error: "File storage is not configured yet. Please send files via WhatsApp.",
-    };
+  const documentTypeParsed = documentTypeSchema.safeParse(
+    String(formData.get("documentType") ?? ""),
+  );
+  if (!documentTypeParsed.success) {
+    console.warn(
+      "uploadDocument invalid documentType:",
+      documentTypeParsed.error.flatten(),
+    );
+    return { ok: false, error: "Please select a document type." };
   }
-
-  const result = await getLeadByUploadToken(token.trim());
-  if (!result) {
-    return { ok: false, error: "This upload link is invalid." };
-  }
-  if (result.expired) {
-    return {
-      ok: false,
-      error: "This upload link has expired. Contact us for a new link.",
-    };
-  }
-
-  const lead = result.lead;
-  const existingCount = lead.uploads.length;
-  if (existingCount >= MAX_UPLOADS_PER_LEAD) {
-    return {
-      ok: false,
-      error: `Maximum of ${MAX_UPLOADS_PER_LEAD} files reached for this inquiry.`,
-    };
-  }
+  const documentType = documentTypeParsed.data;
 
   const file = formData.get("file");
-  const documentTypeRaw = String(formData.get("documentType") ?? "");
-
   if (!(file instanceof File) || file.size === 0) {
     return { ok: false, error: "Please choose a file to upload." };
   }
-
-  if (!ALLOWED_TYPES.has(documentTypeRaw)) {
-    return { ok: false, error: "Please select a document type." };
-  }
-  const documentType = documentTypeRaw as DocumentType;
 
   if (file.size > MAX_UPLOAD_BYTES) {
     return {
@@ -119,10 +98,30 @@ export async function uploadDocument(
     };
   }
 
-  const safeName = file.name.replace(/[^\w.\-() ]+/g, "_").slice(0, 120);
-  const pathname = `leads/${lead.id}/${Date.now()}-${documentType}-${safeName}`;
-
   try {
+    const result = await getLeadByUploadToken(safeToken);
+    if (!result) {
+      return { ok: false, error: "This upload link is invalid." };
+    }
+    if (result.expired) {
+      return {
+        ok: false,
+        error: "This upload link has expired. Contact us for a new link.",
+      };
+    }
+
+    const lead = result.lead;
+    const existingCount = lead.uploads.length;
+    if (existingCount >= MAX_UPLOADS_PER_LEAD) {
+      return {
+        ok: false,
+        error: `Maximum of ${MAX_UPLOADS_PER_LEAD} files reached for this inquiry.`,
+      };
+    }
+
+    const safeName = file.name.replace(/[^\w.\-() ]+/g, "_").slice(0, 120);
+    const pathname = `leads/${lead.id}/${Date.now()}-${documentType}-${safeName}`;
+
     const blob = await put(pathname, file, {
       access: "private",
       contentType: mimeType,
@@ -141,9 +140,6 @@ export async function uploadDocument(
       },
     });
 
-    const uploadCount = existingCount + 1;
-
-    // Notify on first document, and every later upload (staff wants visibility)
     void sendDocumentsUploadedNotification({
       leadId: lead.id,
       name: lead.name,
@@ -152,7 +148,7 @@ export async function uploadDocument(
       country: lead.country,
       fileName: upload.fileName,
       documentType: upload.documentType,
-      uploadCount,
+      uploadCount: existingCount + 1,
     }).catch((err) => console.error("documents email failed:", err));
 
     return {

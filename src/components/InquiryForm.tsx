@@ -18,7 +18,10 @@ type InquiryFormProps = {
   defaultCountry?: string;
 };
 
-export function InquiryForm({ defaultService = "", defaultCountry = "" }: InquiryFormProps) {
+export function InquiryForm({
+  defaultService = "",
+  defaultCountry = "",
+}: InquiryFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [submittedService, setSubmittedService] = useState("");
   const [uploadToken, setUploadToken] = useState<string | undefined>();
@@ -31,6 +34,9 @@ export function InquiryForm({ defaultService = "", defaultCountry = "" }: Inquir
   const [service, setService] = useState(defaultService);
   const [country, setCountry] = useState(defaultCountry);
   const [message, setMessage] = useState("");
+  /** Honeypot — must remain empty */
+  const [website, setWebsite] = useState("");
+  const [formStartedAt] = useState(() => Date.now());
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -44,6 +50,8 @@ export function InquiryForm({ defaultService = "", defaultCountry = "" }: Inquir
         service,
         country: country || undefined,
         message: message || undefined,
+        website,
+        formStartedAt,
       });
 
       if (!result.ok) {
@@ -64,8 +72,8 @@ export function InquiryForm({ defaultService = "", defaultCountry = "" }: Inquir
         <CheckCircle2 className="mx-auto size-12 text-teal" />
         <h3 className="mt-4 font-display text-2xl text-navy">Inquiry received</h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          Thank you, {name}. We&apos;ve saved your details and sent a notification to our team. For
-          a faster reply, message us on WhatsApp.
+          Thank you, {name}. We&apos;ve saved your details and sent a notification to our
+          team. For a faster reply, message us on WhatsApp.
         </p>
         <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           {uploadToken ? (
@@ -85,7 +93,10 @@ export function InquiryForm({ defaultService = "", defaultCountry = "" }: Inquir
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              buttonVariants({ size: "lg", variant: uploadToken ? "outline" : "default" }),
+              buttonVariants({
+                size: "lg",
+                variant: uploadToken ? "outline" : "default",
+              }),
               !uploadToken && "bg-[#25D366] text-white hover:bg-[#20bd5a]",
               uploadToken && "border-[#25D366]/text-[#128C7E] hover:bg-[#25D366]/10",
               "inline-flex gap-2",
@@ -97,8 +108,8 @@ export function InquiryForm({ defaultService = "", defaultCountry = "" }: Inquir
         </div>
         {uploadToken ? (
           <p className="mt-3 text-xs text-muted-foreground">
-            Optional — upload after we chat, or now if you already have your papers ready. This
-            private link expires in 7 days.
+            Optional — upload after we chat, or now if you already have your papers ready.
+            This private link expires in 7 days.
           </p>
         ) : null}
         <p className="mt-4 text-xs text-muted-foreground">
@@ -120,6 +131,7 @@ export function InquiryForm({ defaultService = "", defaultCountry = "" }: Inquir
             setService(defaultService);
             setCountry(defaultCountry);
             setMessage("");
+            setWebsite("");
           }}
         >
           Send another inquiry
@@ -130,7 +142,27 @@ export function InquiryForm({ defaultService = "", defaultCountry = "" }: Inquir
 
   return (
     <div className="rounded-2xl border border-border bg-card p-6 shadow-[0_20px_60px_-20px_rgba(20,82,82,0.12)] sm:p-8">
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="relative space-y-5" noValidate>
+        {/*
+          Honeypot: visually off-screen (not display:none), aria-hidden so
+          assistive tech skips it. Bots that autofill every field trip this.
+        */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-[10000px] top-auto h-px w-px overflow-hidden opacity-0"
+        >
+          <label htmlFor="company_website">Company website</label>
+          <input
+            id="company_website"
+            name="website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+          />
+        </div>
+
         <div className="grid gap-5 sm:grid-cols-2">
           <div className="space-y-2">
             <Label htmlFor="name">Full name</Label>
@@ -138,6 +170,7 @@ export function InquiryForm({ defaultService = "", defaultCountry = "" }: Inquir
               id="name"
               name="name"
               required
+              autoComplete="name"
               placeholder="Your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -150,6 +183,7 @@ export function InquiryForm({ defaultService = "", defaultCountry = "" }: Inquir
               id="phone"
               name="phone"
               required
+              autoComplete="tel"
               placeholder="+880 1XXX-XXXXXX"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
@@ -164,6 +198,7 @@ export function InquiryForm({ defaultService = "", defaultCountry = "" }: Inquir
             id="email"
             name="email"
             type="email"
+            autoComplete="email"
             placeholder="you@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}

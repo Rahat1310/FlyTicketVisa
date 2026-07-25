@@ -2,11 +2,25 @@ import { prisma } from "@/lib/db";
 import { generateUploadToken, getTokenExpiry } from "@/lib/upload-token";
 
 export function isClerkConfigured() {
-  return Boolean(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && process.env.CLERK_SECRET_KEY);
+  return Boolean(
+    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
+      process.env.CLERK_SECRET_KEY,
+  );
 }
 
+/**
+ * Gate admin/internal resources.
+ * - Clerk configured → require a signed-in session
+ * - Production without Clerk → deny (never leave admin open by URL alone)
+ * - Local/dev without Clerk → allow for scaffolding
+ */
 export async function requireAdmin() {
   if (!isClerkConfigured()) {
+    if (process.env.NODE_ENV === "production") {
+      const error = new Error("Admin auth is not configured in production.");
+      console.error(error.message);
+      throw error;
+    }
     return { ok: true as const, mode: "dev" as const };
   }
 

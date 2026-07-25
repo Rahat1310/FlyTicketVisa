@@ -7,7 +7,9 @@ const hasClerk = Boolean(
 
 export default hasClerk
   ? clerkMiddleware(async (auth, req) => {
-      if (req.nextUrl.pathname.startsWith("/admin")) {
+      const path = req.nextUrl.pathname;
+      // Admin UI + admin API — not reachable by guessing the URL alone
+      if (path.startsWith("/admin") || path.startsWith("/api/admin")) {
         await auth.protect();
       }
     })
