@@ -144,6 +144,7 @@ export function InquiryForm({
               placeholder="Your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              className="min-h-[48px]"
             />
           </div>
           <div className="space-y-2">
@@ -155,6 +156,7 @@ export function InquiryForm({
               placeholder="+880 1XXX-XXXXXX"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              className="min-h-[48px]"
             />
           </div>
         </div>
@@ -168,6 +170,7 @@ export function InquiryForm({
             placeholder="you@email.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="min-h-[48px]"
           />
         </div>
 
@@ -180,7 +183,7 @@ export function InquiryForm({
               required
               value={service}
               onChange={(e) => setService(e.target.value)}
-              className="border-input bg-background h-9 w-full rounded-md border px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+              className="border-input bg-background min-h-[48px] w-full rounded-md border px-3 text-base outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] md:text-sm"
             >
               <option value="">Select a service</option>
               {services.map((s) => (
@@ -197,7 +200,7 @@ export function InquiryForm({
               name="country"
               value={country}
               onChange={(e) => setCountry(e.target.value)}
-              className="border-input bg-background h-9 w-full rounded-md border px-3 text-sm outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]"
+              className="border-input bg-background min-h-[48px] w-full rounded-md border px-3 text-base outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] md:text-sm"
             >
               <option value="">Select a country</option>
               {countries.map((c) => (
@@ -218,6 +221,7 @@ export function InquiryForm({
             placeholder="Travel dates, destination, or any questions…"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            className="min-h-[48px]"
           />
         </div>
 
@@ -230,7 +234,7 @@ export function InquiryForm({
         <Button
           type="submit"
           disabled={isPending}
-          className="w-full bg-gold text-navy-deep hover:bg-gold/90 sm:w-auto"
+          className="w-full min-h-[52px] bg-gold text-navy-deep hover:bg-gold/90 sm:w-auto"
         >
           {isPending ? "Submitting…" : "Submit inquiry"}
         </Button>

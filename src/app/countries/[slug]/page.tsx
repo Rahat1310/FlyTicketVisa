@@ -110,7 +110,7 @@ export default async function CountryPage({ params }: Props) {
     <>
       <section className="relative overflow-hidden bg-hero-atmosphere py-14 text-white sm:py-16">
         <div className="pointer-events-none absolute inset-0 bg-section-pattern-dark opacity-60" aria-hidden />
-        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="relative container-fluid">
           <div className="flex flex-wrap items-center gap-2">
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/55">
               {country.region}
@@ -136,7 +136,7 @@ export default async function CountryPage({ params }: Props) {
               />
             </div>
             <div>
-              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl">
+              <h1 className="font-display text-5xl">
                 {country.name}
               </h1>
               <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/70">
@@ -157,7 +157,7 @@ export default async function CountryPage({ params }: Props) {
                   href="/canton-fair"
                   className={cn(
                     buttonVariants(),
-                    "mt-5 inline-flex bg-gold text-navy-deep hover:bg-gold/90",
+                    "mt-5 inline-flex min-h-[44px] items-center bg-gold text-navy-deep hover:bg-gold/90",
                   )}
                 >
                   Also going to Canton Fair?
@@ -186,7 +186,7 @@ export default async function CountryPage({ params }: Props) {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-[1.2fr_1fr] xl:grid-cols-[1.5fr_1fr]">
+        <div className="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-[1.2fr_1fr] xl:grid-cols-[1.5fr_1fr]">
           <div className="flex flex-col gap-5">
             <h2 className="font-display text-2xl text-navy">Documents required</h2>
             {docGroups.map((group) => (
@@ -244,10 +244,15 @@ export default async function CountryPage({ params }: Props) {
 
       <LightSection bordered>
         <h2 className="font-display text-2xl text-navy">Other countries</h2>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {others.slice(0, 6).map((c) => (
-            <CountryCard key={c.slug} country={c} />
-          ))}
+        <div className="relative mt-8">
+          <div className="pointer-events-none absolute -right-4 bottom-0 top-0 z-10 w-8 bg-gradient-to-l from-background to-transparent sm:hidden" />
+          <div className="-mx-4 flex gap-5 overflow-x-auto px-4 pb-4 snap-x snap-mandatory sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
+            {others.slice(0, 6).map((c) => (
+              <div key={c.slug} className="w-[85vw] shrink-0 snap-start sm:w-auto sm:shrink">
+                <CountryCard country={c} />
+              </div>
+            ))}
+          </div>
         </div>
       </LightSection>
 

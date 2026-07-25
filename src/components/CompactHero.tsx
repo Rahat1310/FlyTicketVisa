@@ -17,7 +17,7 @@ export function CompactHero({ eyebrow, title, description, className }: CompactH
       )}
     >
       <div className="pointer-events-none absolute inset-0 bg-section-pattern-dark opacity-60" aria-hidden />
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="relative container-fluid">
         {eyebrow ? (
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/55">
             {eyebrow}

@@ -47,7 +47,7 @@ export function ServiceCard({ service, index = 0, className }: ServiceCardProps)
       )}
     >
       {featured ? (
-        <span className="absolute left-6 top-6 z-20 inline-flex items-center gap-1 rounded-full bg-gold px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-navy-deep">
+        <span className="absolute right-6 top-6 z-20 inline-flex items-center gap-1 rounded-full bg-gold px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-navy-deep">
           Trending
         </span>
       ) : null}
@@ -55,7 +55,7 @@ export function ServiceCard({ service, index = 0, className }: ServiceCardProps)
       <div className="absolute -right-20 -top-20 z-0 h-64 w-64 rounded-full bg-teal/5 blur-3xl transition-transform duration-700 group-hover:scale-150 group-hover:bg-teal/10" />
       <div className="absolute -bottom-20 -left-20 z-0 h-64 w-64 rounded-full bg-gold/5 blur-3xl transition-transform duration-700 group-hover:scale-150 group-hover:bg-gold/15" />
 
-      <span className="absolute -right-4 -top-8 z-0 select-none font-display text-[10rem] font-bold leading-none text-mist/60 transition-all duration-700 group-hover:text-mist/80">
+      <span className="absolute -left-4 -top-8 z-0 select-none font-display text-[10rem] font-bold leading-none text-mist/60 transition-all duration-700 group-hover:text-mist/80">
         {(index + 1).toString().padStart(2, "0")}
       </span>
 

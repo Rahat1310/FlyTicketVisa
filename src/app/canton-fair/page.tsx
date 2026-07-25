@@ -22,27 +22,24 @@ import { getWhatsAppUrl } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Canton Fair Travel & Visa Assistance | China Import & Export Fair",
   description:
-    "Complete Canton Fair travel packages — Official Invitation Letters, Chinese Business M-Visa, flights to Guangzhou, and hotel bookings near Pazhou Complex. Spring & Autumn sessions covered.",
+    "Complete Canton Fair travel packages — Official Invitation Letters, Chinese Business M-Visa, flights to Guangzhou, and hotel bookings near Pazhou Complex. Autumn sessions covered.",
 };
 
 const phases = [
   {
     phase: "Phase 1",
-    spring: "Apr 15 – 19",
     autumn: "Oct 15 – 19",
     categories:
       "Electronics, Home Appliances, Machinery, Hardware & Tools, EVs & Vehicles, Energy",
   },
   {
     phase: "Phase 2",
-    spring: "Apr 23 – 27",
     autumn: "Oct 23 – 27",
     categories:
       "Furniture, Home Décor, Ceramics, Kitchenware, Building Materials, Gifts & Crafts",
   },
   {
     phase: "Phase 3",
-    spring: "May 1 – 5",
     autumn: "Oct 31 – Nov 4",
     categories:
       "Apparel & Fashion, Textiles, Shoes, Office Supplies, Medical Devices, Food & Beverages, Bags",
@@ -171,7 +168,7 @@ const faqs = [
   },
   {
     q: "What is the difference between Spring and Autumn sessions?",
-    a: "Both sessions have the same 3-phase structure with the same sourcing categories. Spring runs April–May, Autumn runs October–November. The difference is timing — you can choose whichever aligns best with your sourcing calendar.",
+    a: "Both sessions have the same 3-phase structure with the same sourcing categories. Currently, we are preparing for the upcoming Autumn session (October–November).",
   },
 ];
 
@@ -197,18 +194,18 @@ export default function CantonFairPage() {
           aria-hidden
         />
 
-        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 xl:px-8">
+        <div className="relative container-fluid">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-teal/80">
             China Import &amp; Export Fair · Guangzhou
           </p>
-          <h1 className="mt-4 max-w-4xl font-display text-4xl leading-tight text-balance sm:text-5xl md:text-6xl">
+          <h1 className="mt-4 max-w-4xl font-display text-6xl leading-tight text-balance">
             Canton Fair Travel &amp;{" "}
             <span className="text-gold">Visa Assistance</span>
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
             Your complete solution for Canton Fair — Official Invitation Letters, Chinese
             Business M-Visa, flights to Guangzhou &amp; hotels near Pazhou Complex.
-            Spring &amp; Autumn sessions. All handled end-to-end.
+            Autumn sessions. All handled end-to-end.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
@@ -238,7 +235,7 @@ export default function CantonFairPage() {
               "Official Invitation Letters",
               "Embassy-Ready Visa Files",
               "Guangzhou Hotel Packages",
-              "Spring & Autumn Sessions",
+              "Autumn Sessions",
             ].map((badge) => (
               <div
                 key={badge}
@@ -262,7 +259,7 @@ export default function CantonFairPage() {
           className="pointer-events-none absolute inset-0 bg-section-pattern"
           aria-hidden
         />
-        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 xl:px-8">
+        <div className="relative container-fluid">
           <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-teal/10 bg-teal/5 px-4 py-2">
             <span className="relative flex size-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75" />
@@ -275,7 +272,7 @@ export default function CantonFairPage() {
 
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="font-display text-4xl font-medium tracking-tight text-navy sm:text-5xl">
+              <h2 className="font-display text-5xl font-medium tracking-tight text-navy">
                 Official Fair Timings
               </h2>
               <p className="mt-4 text-base text-muted-foreground">
@@ -343,7 +340,7 @@ export default function CantonFairPage() {
 
       {/* ── SERVICE PACKAGES ── */}
       <section className="relative py-16 sm:py-20">
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 xl:px-8">
+        <div className="container-fluid">
           <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-teal/10 bg-teal/5 px-4 py-2">
             <span className="relative flex size-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75" />
@@ -355,7 +352,7 @@ export default function CantonFairPage() {
           </div>
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <h2 className="font-display text-4xl font-medium tracking-tight text-navy sm:text-5xl">
+              <h2 className="font-display text-5xl font-medium tracking-tight text-navy">
                 Our Canton Fair Services
               </h2>
               <div className="mt-4 flex items-center gap-4">
@@ -411,7 +408,7 @@ export default function CantonFairPage() {
           className="pointer-events-none absolute inset-0 bg-section-pattern"
           aria-hidden
         />
-        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 xl:px-8">
+        <div className="relative container-fluid">
           <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-teal/10 bg-teal/5 px-4 py-2">
             <span className="relative flex size-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75" />
@@ -421,7 +418,7 @@ export default function CantonFairPage() {
               Visa Requirements
             </span>
           </div>
-          <h2 className="font-display text-4xl font-medium tracking-tight text-navy sm:text-5xl">
+          <h2 className="font-display text-5xl font-medium tracking-tight text-navy">
             Document Checklist
           </h2>
           <div className="mt-4 flex items-center gap-4">
@@ -472,7 +469,7 @@ export default function CantonFairPage() {
 
       {/* ── HOW IT WORKS ── */}
       <section className="relative py-16 sm:py-20">
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 xl:px-8">
+        <div className="container-fluid">
           <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-teal/10 bg-teal/5 px-4 py-2">
             <span className="relative flex size-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75" />
@@ -482,7 +479,7 @@ export default function CantonFairPage() {
               Process
             </span>
           </div>
-          <h2 className="font-display text-4xl font-medium tracking-tight text-navy sm:text-5xl">
+          <h2 className="font-display text-5xl font-medium tracking-tight text-navy">
             How It Works
           </h2>
           <div className="mt-4 flex items-center gap-4">
@@ -536,7 +533,7 @@ export default function CantonFairPage() {
           className="pointer-events-none absolute inset-0 bg-section-pattern"
           aria-hidden
         />
-        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 xl:px-8">
+        <div className="relative container-fluid">
           <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
             <div>
               <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-teal/10 bg-teal/5 px-4 py-2">
@@ -548,7 +545,7 @@ export default function CantonFairPage() {
                   FAQ
                 </span>
               </div>
-              <h2 className="font-display text-4xl font-medium tracking-tight text-navy sm:text-5xl">
+              <h2 className="font-display text-5xl font-medium tracking-tight text-navy">
                 Common Questions
               </h2>
               <p className="mt-4 text-base text-muted-foreground">

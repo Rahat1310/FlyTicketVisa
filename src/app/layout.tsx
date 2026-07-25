@@ -3,6 +3,7 @@ import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { MobileBottomBar } from "@/components/MobileBottomBar";
 import { AppProviders } from "@/components/AppProviders";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
@@ -57,6 +58,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
           <WhatsAppFloat />
+          <MobileBottomBar />
           <Analytics />
           <SpeedInsights />
         </AppProviders>

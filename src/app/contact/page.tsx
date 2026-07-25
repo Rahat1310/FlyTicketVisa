@@ -82,11 +82,11 @@ export default async function ContactPage({ searchParams }: Props) {
               <p className="mt-5 text-xs text-muted-foreground">{siteConfig.hours}</p>
             </div>
 
-            <div className="overflow-hidden rounded-2xl border border-border">
+            <div className="overflow-hidden rounded-2xl border border-border aspect-video w-full max-w-full">
               <iframe
                 title="Office map"
                 src={siteConfig.address.mapEmbedUrl}
-                className="h-56 w-full"
+                className="h-full w-full border-0"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />

@@ -3,6 +3,7 @@ import { ArrowRight, Flame } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { getCountryFlagUrl } from "@/lib/data/flags";
 import { cn } from "@/lib/utils";
+import { SiteImage } from "@/components/SiteImage";
 
 /** Homepage featured strip — China Visa + Canton Fair for FB campaign traffic */
 export function FeaturedHotSection() {
@@ -21,7 +22,7 @@ export function FeaturedHotSection() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="relative container-fluid">
         <div className="flex flex-wrap items-center gap-2">
           <span className="animate-trending-pulse inline-flex items-center gap-1.5 rounded-full bg-gold px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-navy-deep shadow-[0_0_0_0_rgba(201,162,39,0.55)]">
             <Flame className="size-3.5" />
@@ -40,13 +41,15 @@ export function FeaturedHotSection() {
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           <Link
             href="/countries/china"
-            className="group flex items-center gap-4 rounded-2xl border border-white/15 bg-white/5 p-5 transition-all hover:border-gold/50 hover:bg-white/10"
+            className="group flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-5 rounded-2xl border border-white/15 bg-white/5 p-5 transition-all hover:border-gold/50 hover:bg-white/10"
           >
-            <div className="flex h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 border-gold/40">
-              <img
+            <div className="relative flex h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 border-gold/40">
+              <SiteImage
                 src={getCountryFlagUrl("china")}
                 alt="China flag"
-                className="h-full w-full object-cover"
+                fill
+                sizes="56px"
+                className="object-cover"
               />
             </div>
             <div className="min-w-0 flex-1">
@@ -58,12 +61,12 @@ export function FeaturedHotSection() {
                 Documents checklist · delivery in 2–3 weeks
               </p>
             </div>
-            <ArrowRight className="size-5 shrink-0 text-gold transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="size-5 shrink-0 text-gold transition-transform group-hover:translate-x-1 md:ml-auto" />
           </Link>
 
           <Link
             href="/canton-fair"
-            className="group flex items-center gap-4 rounded-2xl border border-gold/40 bg-gold/10 p-5 transition-all hover:border-gold hover:bg-gold/15"
+            className="group flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-5 rounded-2xl border border-gold/40 bg-gold/10 p-5 transition-all hover:border-gold hover:bg-gold/15"
           >
             <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gold text-navy-deep">
               <Flame className="size-7" />
@@ -77,16 +80,16 @@ export function FeaturedHotSection() {
                 Invitation · China M-visa · flights & hotels
               </p>
             </div>
-            <ArrowRight className="size-5 shrink-0 text-gold transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="size-5 shrink-0 text-gold transition-transform group-hover:translate-x-1 md:ml-auto" />
           </Link>
         </div>
 
-        <div className="mt-6 flex flex-wrap gap-3">
+        <div className="mt-6 flex flex-col md:flex-row gap-3">
           <Link
             href="/canton-fair"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "bg-gold text-navy-deep hover:bg-gold/90",
+              "w-full md:w-auto bg-gold text-navy-deep hover:bg-gold/90",
             )}
           >
             Explore Canton Fair
@@ -95,7 +98,7 @@ export function FeaturedHotSection() {
             href="/contact?service=Canton%20Fair&country=China"
             className={cn(
               buttonVariants({ variant: "outline", size: "lg" }),
-              "border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white",
+              "w-full md:w-auto border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white",
             )}
           >
             Inquire now

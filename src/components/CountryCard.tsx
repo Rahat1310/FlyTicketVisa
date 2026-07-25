@@ -3,6 +3,7 @@ import { ArrowRight, Flame } from "lucide-react";
 import type { Country } from "@/lib/data/countries";
 import { getCountryFlagUrl } from "@/lib/data/flags";
 import { cn } from "@/lib/utils";
+import { SiteImage } from "@/components/SiteImage";
 
 type CountryCardProps = {
   country: Country;
@@ -41,11 +42,12 @@ export function CountryCard({
           featured ? "border-gold/50" : "border-border/80",
         )}
       >
-        <img
+        <SiteImage
           src={getCountryFlagUrl(country.slug)}
           alt={`${country.name} flag`}
-          className="h-full w-full object-cover"
-          loading="lazy"
+          fill
+          sizes="56px"
+          className="object-cover"
         />
       </div>
 

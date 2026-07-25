@@ -25,7 +25,7 @@ export function LightSection({
     >
       <div className="pointer-events-none absolute inset-0 bg-section-atmosphere" aria-hidden />
       <div className="pointer-events-none absolute inset-0 bg-section-pattern" aria-hidden />
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">{children}</div>
+      <div className="relative container-fluid">{children}</div>
     </section>
   );
 }

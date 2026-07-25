@@ -38,17 +38,17 @@ export function CTABanner({
       )}
     >
       <div className="pointer-events-none absolute inset-0 bg-section-pattern-dark" aria-hidden />
-      <FadeIn delay={0.2} className="relative mx-auto max-w-6xl px-4 text-center sm:px-6">
+      <FadeIn delay={0.2} className="relative container-fluid text-center">
         <h2 className="font-display text-3xl text-balance sm:text-4xl">
           <AnimatedText text={title} />
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-white/65">{description}</p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
           <Link
             href={primaryHref}
             className={cn(
               buttonVariants({ size: "lg" }),
-              "bg-gold text-navy-deep hover:bg-gold/90",
+              "w-full sm:w-auto bg-gold text-navy-deep hover:bg-gold/90",
             )}
           >
             {primaryLabel}
@@ -57,7 +57,7 @@ export function CTABanner({
             href={secondaryLink}
             className={cn(
               buttonVariants({ variant: "outline", size: "lg" }),
-              "border-white/25 bg-transparent text-white hover:bg-white/10 hover:text-white",
+              "w-full sm:w-auto border-white/25 bg-transparent text-white hover:bg-white/10 hover:text-white",
             )}
           >
             {secondaryText}
@@ -69,8 +69,8 @@ export function CTABanner({
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/40">
               Or visit us in person
             </p>
-            <div className="inline-flex items-center gap-3 rounded-full border border-teal/20 bg-teal/10 px-5 py-2.5 text-sm font-medium text-teal backdrop-blur-md">
-              <MapPin className="size-4" />
+            <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 rounded-3xl sm:rounded-full border border-teal/20 bg-teal/10 px-5 py-3 sm:py-2.5 text-center sm:text-left text-sm font-medium text-teal backdrop-blur-md">
+              <MapPin className="size-4 shrink-0" />
               <span>{siteConfig.address.lines.join(", ")}</span>
             </div>
           </div>

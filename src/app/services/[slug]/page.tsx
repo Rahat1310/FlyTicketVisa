@@ -44,7 +44,7 @@ export default async function ServicePage({ params }: Props) {
       />
 
       <LightSection>
-        <div className="grid gap-12 lg:grid-cols-2">
+        <div className="grid gap-12 md:grid-cols-2">
           <div>
             <SectionHeading
               eyebrow="Process"
@@ -93,10 +93,15 @@ export default async function ServicePage({ params }: Props) {
             title="Countries for this service"
             description="Open a country page for documents, fees, and processing time."
           />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {related.map((country) => (
-              <CountryCard key={country.slug} country={country} />
-            ))}
+          <div className="relative mt-10">
+            <div className="pointer-events-none absolute -right-4 bottom-0 top-0 z-10 w-8 bg-gradient-to-l from-background to-transparent sm:hidden" />
+            <div className="-mx-4 flex gap-5 overflow-x-auto px-4 pb-4 snap-x snap-mandatory sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
+              {related.map((country) => (
+                <div key={country.slug} className="w-[85vw] shrink-0 snap-start sm:w-auto sm:shrink">
+                  <CountryCard country={country} />
+                </div>
+              ))}
+            </div>
           </div>
         </LightSection>
       ) : (
@@ -106,19 +111,24 @@ export default async function ServicePage({ params }: Props) {
             title="Popular countries"
             description="We help with visas and tickets worldwide."
           />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {getCountriesBySlugs([
-              "china",
-              "india",
-              "thailand",
-              "malaysia",
-              "singapore",
-              "saudi-arabia",
-            ]).map(
-              (country) => (
-                <CountryCard key={country.slug} country={country} />
-              ),
-            )}
+          <div className="relative mt-10">
+            <div className="pointer-events-none absolute -right-4 bottom-0 top-0 z-10 w-8 bg-gradient-to-l from-background to-transparent sm:hidden" />
+            <div className="-mx-4 flex gap-5 overflow-x-auto px-4 pb-4 snap-x snap-mandatory sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
+              {getCountriesBySlugs([
+                "china",
+                "india",
+                "thailand",
+                "malaysia",
+                "singapore",
+                "saudi-arabia",
+              ]).map(
+                (country) => (
+                  <div key={country.slug} className="w-[85vw] shrink-0 snap-start sm:w-auto sm:shrink">
+                    <CountryCard country={country} />
+                  </div>
+                ),
+              )}
+            </div>
           </div>
         </LightSection>
       )}

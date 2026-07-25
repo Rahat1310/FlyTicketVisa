@@ -100,7 +100,7 @@ export default function AboutPage() {
             </p>
             <p className="mt-4 text-sm text-muted-foreground">
               Phone:{" "}
-              <a href={siteConfig.phoneHref} className="font-medium text-teal">
+              <a href={siteConfig.phoneHref} className="inline-flex min-h-[44px] items-center font-medium text-teal">
                 {siteConfig.phone}
               </a>
             </p>

@@ -29,7 +29,7 @@ export function SiteImage({
         src={src}
         alt={alt}
         fill
-        sizes={sizes ?? "100vw"}
+        sizes={sizes ?? "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"}
         priority={priority}
         className={cn("object-cover", className)}
       />
