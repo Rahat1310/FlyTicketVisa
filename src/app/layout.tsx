@@ -3,6 +3,7 @@ import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { AppProviders } from "@/components/AppProviders";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -51,12 +52,14 @@ export default function RootLayout({
       className={`${plusJakarta.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col font-sans">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <WhatsAppFloat />
-        <Analytics />
-        <SpeedInsights />
+        <AppProviders>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <WhatsAppFloat />
+          <Analytics />
+          <SpeedInsights />
+        </AppProviders>
       </body>
     </html>
   );

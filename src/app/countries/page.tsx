@@ -8,7 +8,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 export const metadata: Metadata = {
   title: "Countries We Serve",
   description:
-    "Visa support for Bangladeshi applicants — UK, Australia, Canada, Malaysia, UAE, Thailand, Singapore, Schengen, Saudi Arabia, and more.",
+    "Visa support for Bangladeshi applicants — China, India, Thailand, Malaysia, Singapore, Africa, Saudi Arabia, Egypt, Hong Kong, Turkey, Indonesia, Philippines, South Korea, Japan, and America.",
 };
 
 export default function CountriesIndexPage() {

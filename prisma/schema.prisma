@@ -8,13 +8,30 @@ datasource db {
 }
 
 model Lead {
-  id        String   @id @default(cuid())
-  name      String
-  phone     String
-  email     String?
-  service   String
-  country   String?
-  message   String?
-  status    String   @default("new")
-  createdAt DateTime @default(now())
+  id             String    @id @default(cuid())
+  name           String
+  phone          String
+  email          String?
+  service        String
+  country        String?
+  message        String?
+  status         String    @default("new")
+  uploadToken    String?   @unique
+  tokenExpiresAt DateTime?
+  createdAt      DateTime  @default(now())
+  uploads        Upload[]
+}
+
+model Upload {
+  id           String   @id @default(cuid())
+  leadId       String
+  lead         Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  fileUrl      String
+  fileName     String
+  documentType String
+  mimeType     String?
+  sizeBytes    Int?
+  uploadedAt   DateTime @default(now())
+
+  @@index([leadId])
 }

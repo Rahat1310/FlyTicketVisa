@@ -8,6 +8,7 @@ import { CountryGrid } from "@/components/CountryGrid";
 import { SectionHeading } from "@/components/SectionHeading";
 import { LightSection } from "@/components/LightSection";
 import { CTABanner } from "@/components/CTABanner";
+import { FeaturedHotSection } from "@/components/FeaturedHotSection";
 import { FadeIn, TypewriterGroup, TypewriterPart } from "@/components/Animations";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -72,28 +73,30 @@ export default function HomePage() {
 
               <div className="animate-fade-up-delay-3 mt-10 flex flex-wrap items-center justify-center gap-3">
                 <Link
-                  href="/contact"
+                  href="/canton-fair"
                   className={cn(
                     buttonVariants({ size: "lg" }),
                     "bg-gradient-to-b from-gold to-[#b38e1e] text-navy-deep font-semibold shadow-[0_0_20px_rgba(201,162,39,0.3)] hover:shadow-[0_0_30px_rgba(201,162,39,0.5)] hover:-translate-y-0.5 border border-gold/50 transition-all duration-300",
                   )}
                 >
-                  Start an inquiry
+                  Canton Fair · Trending
                 </Link>
                 <Link
-                  href="#services"
+                  href="/countries/china"
                   className={cn(
                     buttonVariants({ variant: "outline", size: "lg" }),
                     "border-white/40 bg-white/5 text-white backdrop-blur-md shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:bg-white/15 hover:border-white/60 hover:shadow-[0_0_25px_rgba(255,255,255,0.15)] hover:-translate-y-0.5 transition-all duration-300",
                   )}
                 >
-                  Check visa requirements
+                  China Visa checklist
                 </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <FeaturedHotSection />
 
       <section className="relative border-b border-border bg-section-atmosphere py-10">
         <div className="pointer-events-none absolute inset-0 bg-section-pattern" aria-hidden />
@@ -120,7 +123,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="Priority destinations"
             title="Countries we help with most"
-            description="Transparent fees, documents, and processing times on every country page."
+            description="Transparent fees, documents, and processing times on every country page. China is featured this season."
           />
           <Link
             href="/countries"

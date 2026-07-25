@@ -12,10 +12,11 @@ const visaServices = [
   { href: "/services/business-visa", label: "Business Visa" },
   { href: "/services/medical-visa", label: "Medical Visa" },
   { href: "/services/student-visa", label: "Student Visa" },
-  { href: "/services/umrah-package", label: "Umrah Package" },
 ] as const;
 
 const navLinks = [
+  { href: "/services/umrah-package", label: "Umrah & Hajj" },
+  { href: "/canton-fair", label: "Canton Fair" },
   { href: "/services/air-ticket", label: "Air Ticket" },
   { href: "/countries", label: "Countries" },
   { href: "/about", label: "About" },
@@ -33,12 +34,12 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-navy-deep/90 text-white backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+      <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 sm:px-6 xl:px-8">
         <Link href="/" className="font-display text-xl tracking-tight sm:text-2xl">
           {siteConfig.name}
         </Link>
 
-        <nav className="hidden items-center gap-7 text-sm text-white/80 md:flex">
+        <nav className="hidden items-center gap-5 text-sm text-white/80 lg:flex lg:gap-7">
           {/* Visa service dropdown */}
           <div className="group relative">
             <button
@@ -65,15 +66,22 @@ export function Header() {
             </div>
           </div>
 
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="transition-colors hover:text-white"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isHot = link.href === "/canton-fair";
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "transition-colors hover:text-white",
+                  isHot &&
+                    "animate-nav-trending rounded-full bg-gold/20 px-2.5 py-1 font-semibold text-gold ring-1 ring-gold/40 hover:bg-gold/30 hover:text-gold",
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
@@ -113,7 +121,7 @@ export function Header() {
           open ? "block" : "hidden",
         )}
       >
-        <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-4">
+        <nav className="mx-auto flex max-w-[1400px] flex-col gap-1 px-4 py-4 sm:px-6">
           <button
             type="button"
             className="flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-sm text-white/85 hover:bg-white/5"
@@ -140,16 +148,24 @@ export function Header() {
             </div>
           ) : null}
 
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="rounded-md px-3 py-2.5 text-sm text-white/85 hover:bg-white/5"
-              onClick={closeMobile}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isHot = link.href === "/canton-fair";
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "rounded-md px-3 py-2.5 text-sm hover:bg-white/5",
+                  isHot
+                    ? "animate-nav-trending font-semibold text-gold"
+                    : "text-white/85",
+                )}
+                onClick={closeMobile}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
 
           <a
             href={siteConfig.phoneHref}

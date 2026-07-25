@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useTransition, type FormEvent } from "react";
-import { CheckCircle2, MessageCircle } from "lucide-react";
+import Link from "next/link";
+import { CheckCircle2, MessageCircle, Upload } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -23,6 +24,7 @@ export function InquiryForm({
 }: InquiryFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [submittedService, setSubmittedService] = useState("");
+  const [uploadToken, setUploadToken] = useState<string | undefined>();
   const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
 
@@ -53,6 +55,7 @@ export function InquiryForm({
       }
 
       setSubmittedService(result.service);
+      setUploadToken(result.uploadToken);
       setSubmitted(true);
     });
   }
@@ -67,18 +70,40 @@ export function InquiryForm({
           Thank you, {name}. We&apos;ve saved your details and sent a notification to our
           team. For a faster reply, message us on WhatsApp.
         </p>
-        <a
-          href={getWhatsAppUrl(waMessage)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={cn(
-            buttonVariants({ size: "lg" }),
-            "mt-6 inline-flex gap-2 bg-[#25D366] text-white hover:bg-[#20bd5a]",
-          )}
-        >
-          <MessageCircle className="size-5" />
-          Continue on WhatsApp
-        </a>
+        <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+          {uploadToken ? (
+            <Link
+              href={`/upload/${uploadToken}`}
+              className={cn(
+                buttonVariants({ size: "lg" }),
+                "inline-flex gap-2 bg-gold text-navy-deep hover:bg-gold/90",
+              )}
+            >
+              <Upload className="size-5" />
+              Upload your documents
+            </Link>
+          ) : null}
+          <a
+            href={getWhatsAppUrl(waMessage)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              buttonVariants({ size: "lg", variant: uploadToken ? "outline" : "default" }),
+              !uploadToken && "bg-[#25D366] text-white hover:bg-[#20bd5a]",
+              uploadToken && "border-[#25D366]/text-[#128C7E] hover:bg-[#25D366]/10",
+              "inline-flex gap-2",
+            )}
+          >
+            <MessageCircle className="size-5" />
+            Continue on WhatsApp
+          </a>
+        </div>
+        {uploadToken ? (
+          <p className="mt-3 text-xs text-muted-foreground">
+            Optional — upload after we chat, or now if you already have your papers ready.
+            This private link expires in 7 days.
+          </p>
+        ) : null}
         <p className="mt-4 text-xs text-muted-foreground">
           Or call{" "}
           <a href={siteConfig.phoneHref} className="font-medium text-teal">
@@ -91,6 +116,7 @@ export function InquiryForm({
           className="mt-6"
           onClick={() => {
             setSubmitted(false);
+            setUploadToken(undefined);
             setName("");
             setPhone("");
             setEmail("");

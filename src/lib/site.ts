@@ -9,6 +9,7 @@ export const siteConfig = {
   whatsapp: "+8801XXXXXXXXX",
   whatsappMessage:
     "Assalamu alaikum. I would like help with a visa / air ticket inquiry.",
+  messengerUrl: "https://m.me/flyticketvisa",
   email: "support@flyvisapoints.com",
   address: {
     lines: [

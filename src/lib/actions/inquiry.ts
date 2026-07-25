@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/db";
 import { sendLeadNotification } from "@/lib/email";
+import { createLeadUploadTokenFields } from "@/lib/auth";
 
 export type InquiryPayload = {
   name: string;
@@ -13,7 +14,7 @@ export type InquiryPayload = {
 };
 
 export type SubmitInquiryResult =
-  | { ok: true; service: string }
+  | { ok: true; service: string; uploadToken?: string }
   | { ok: false; error: string };
 
 export async function submitInquiry(
@@ -24,8 +25,11 @@ export async function submitInquiry(
   }
 
   try {
+    let uploadToken: string | undefined;
+
     if (process.env.DATABASE_URL) {
-      await prisma.lead.create({
+      const tokenFields = await createLeadUploadTokenFields();
+      const lead = await prisma.lead.create({
         data: {
           name: payload.name.trim(),
           phone: payload.phone.trim(),
@@ -33,15 +37,26 @@ export async function submitInquiry(
           service: payload.service.trim(),
           country: payload.country?.trim() || null,
           message: payload.message?.trim() || null,
+          uploadToken: tokenFields.uploadToken,
+          tokenExpiresAt: tokenFields.tokenExpiresAt,
         },
       });
+      uploadToken = lead.uploadToken ?? undefined;
     } else {
       console.warn("DATABASE_URL not set — skipping Prisma insert.");
     }
 
-    await sendLeadNotification(payload);
+    const emailResult = await sendLeadNotification(payload);
+    if (!emailResult.ok) {
+      // Still keep the lead in DB if it was saved; surface email failure to the UI.
+      return { ok: false, error: emailResult.error };
+    }
 
-    return { ok: true, service: payload.service.trim() };
+    return {
+      ok: true,
+      service: payload.service.trim(),
+      uploadToken,
+    };
   } catch (error) {
     console.error("submitInquiry failed:", error);
     return {

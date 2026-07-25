@@ -241,3 +241,79 @@
 .animate-fly-reverse {
   animation: fly-reverse 18s linear infinite;
 }
+
+@keyframes trending-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.55);
+    transform: scale(1);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(201, 162, 39, 0);
+    transform: scale(1.03);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(201, 162, 39, 0);
+    transform: scale(1);
+  }
+}
+
+.animate-trending-pulse {
+  animation: trending-pulse 1.8s ease-out infinite;
+}
+
+@keyframes nav-trending {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.45);
+    background-color: rgba(201, 162, 39, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(201, 162, 39, 0);
+    background-color: rgba(201, 162, 39, 0.35);
+  }
+}
+
+.animate-nav-trending {
+  animation: nav-trending 2s ease-in-out infinite;
+}
+
+@keyframes chat-pulse-whatsapp {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+@keyframes chat-pulse-messenger {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 132, 255, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(0, 132, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 132, 255, 0);
+  }
+}
+
+.animate-chat-pulse-whatsapp {
+  animation: chat-pulse-whatsapp 1.8s ease-out infinite;
+}
+
+.animate-chat-pulse-messenger {
+  animation: chat-pulse-messenger 1.8s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-trending-pulse,
+  .animate-nav-trending,
+  .animate-chat-pulse-whatsapp,
+  .animate-chat-pulse-messenger {
+    animation: none !important;
+  }
+}

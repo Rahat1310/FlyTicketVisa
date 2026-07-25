@@ -107,7 +107,14 @@ export default async function ServicePage({ params }: Props) {
             description="We help with visas and tickets worldwide."
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {getCountriesBySlugs(["uae", "malaysia", "uk", "saudi-arabia", "thailand", "canada"]).map(
+            {getCountriesBySlugs([
+              "china",
+              "india",
+              "thailand",
+              "malaysia",
+              "singapore",
+              "saudi-arabia",
+            ]).map(
               (country) => (
                 <CountryCard key={country.slug} country={country} />
               ),

@@ -19,11 +19,11 @@
 Each service needs its own landing page (see Section 5).
 
 ## 3. Priority Countries (build these first, template-driven)
-- **Umrah** → Saudi Arabia
-- **Student Visa** → UK, Australia, Canada, Malaysia
-- **Tourist / Business** → UAE, Malaysia, Thailand, Singapore, Schengen (group), UK
+- China, India, Thailand, Malaysia, Singapore
+- Africa (group), Saudi Arabia, Egypt, Hong Kong
+- Turkey, Indonesia, Philippines, South Korea, Japan, America (USA)
 
-More countries added post-launch using the same country-page template.
+More countries can be added later using the same country-page template.
 
 ## 4. Tech Stack (Decided)
 | Layer | Choice | Notes |

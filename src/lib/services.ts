@@ -4,6 +4,7 @@ export type ServiceSlug =
   | "tourist-visa"
   | "business-visa"
   | "medical-visa"
+  | "canton-fair"
   | "air-ticket";
 
 export type Service = {
@@ -48,11 +49,11 @@ export const services: Service[] = [
     title: "Student Visa",
     shortTitle: "Student",
     summary:
-      "End-to-end student visa support for UK, Australia, Canada, Malaysia, and more.",
+      "End-to-end student visa support for Malaysia, China, Japan, South Korea, Turkey, America, and more.",
     description:
       "From university shortlisting guidance to document preparation and embassy filing support, we help students and parents navigate the student visa process with transparent timelines and clear requirements.",
     highlights: [
-      "UK, Australia, Canada, Malaysia focus",
+      "Asia & USA study destinations",
       "SOP & document checklist support",
       "Financial document guidance",
       "Application tracking updates",
@@ -62,9 +63,16 @@ export const services: Service[] = [
       "Offer / admission letter",
       "Academic transcripts & certificates",
       "Bank statements / financial proof",
-      "English test results (IELTS/PTE if required)",
+      "English / language test results if required",
     ],
-    relatedCountries: ["uk", "australia", "canada", "malaysia"],
+    relatedCountries: [
+      "malaysia",
+      "china",
+      "japan",
+      "south-korea",
+      "turkey",
+      "america",
+    ],
     cta: "Start a student visa inquiry",
   },
   {
@@ -72,11 +80,11 @@ export const services: Service[] = [
     title: "Tourist Visa",
     shortTitle: "Tourist",
     summary:
-      "Holiday and visit visas for UAE, Malaysia, Thailand, Singapore, Schengen, UK, and more.",
+      "Holiday and visit visas for Thailand, Malaysia, Singapore, India, Turkey, Japan, and more.",
     description:
       "Whether you are planning a short holiday or visiting family abroad, we prepare your tourist visa file with the documents embassies expect — so you avoid common rejection mistakes.",
     highlights: [
-      "Popular Asia & Europe destinations",
+      "Popular Asia & Middle East destinations",
       "Clear document lists per country",
       "Fee & processing time transparency",
       "WhatsApp updates throughout",
@@ -89,12 +97,20 @@ export const services: Service[] = [
       "Passport photos as per embassy rules",
     ],
     relatedCountries: [
-      "uae",
-      "malaysia",
       "thailand",
+      "malaysia",
       "singapore",
-      "schengen",
-      "uk",
+      "india",
+      "indonesia",
+      "philippines",
+      "hong-kong",
+      "turkey",
+      "egypt",
+      "japan",
+      "south-korea",
+      "china",
+      "america",
+      "africa",
     ],
     cta: "Plan your tourist visa",
   },
@@ -120,12 +136,17 @@ export const services: Service[] = [
       "Bank & tax documents as needed",
     ],
     relatedCountries: [
-      "uae",
+      "china",
       "malaysia",
-      "thailand",
       "singapore",
-      "schengen",
-      "uk",
+      "thailand",
+      "hong-kong",
+      "turkey",
+      "japan",
+      "south-korea",
+      "america",
+      "indonesia",
+      "india",
     ],
     cta: "Request business visa help",
   },
@@ -150,7 +171,7 @@ export const services: Service[] = [
       "Attendant details (if traveling with patient)",
       "Financial proof for treatment & stay",
     ],
-    relatedCountries: ["thailand", "singapore", "malaysia"],
+    relatedCountries: ["india", "thailand", "singapore", "malaysia"],
     cta: "Get medical visa guidance",
   },
   {
@@ -176,6 +197,30 @@ export const services: Service[] = [
     ],
     relatedCountries: [],
     cta: "Get a ticket quote",
+  },
+  {
+    slug: "canton-fair",
+    title: "Canton Fair",
+    shortTitle: "Canton Fair",
+    summary:
+      "Specialized visa and travel support for attending the China Canton Fair.",
+    description:
+      "Maximize your business opportunities at the Canton Fair. We handle your Chinese business visa, flight bookings, and hotel arrangements so you can focus on sourcing and networking.",
+    highlights: [
+      "Chinese business visa assistance",
+      "Canton Fair invitation letter support",
+      "Flight and hotel packages",
+      "Guangzhou travel guidance",
+    ],
+    requirements: [
+      "Valid passport (minimum 6 months validity)",
+      "Recent passport-size photographs",
+      "Company trade license & documents",
+      "Bank statements",
+      "Canton Fair buyer badge or invitation",
+    ],
+    relatedCountries: ["china"],
+    cta: "Plan your Canton Fair trip",
   },
 ];
 

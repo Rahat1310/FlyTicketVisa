@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Check, Clock, Banknote } from "lucide-react";
-import { CompactHero } from "@/components/CompactHero";
+import { Check, Clock, Banknote, Flame } from "lucide-react";
 import { LightSection } from "@/components/LightSection";
 import { CTABanner } from "@/components/CTABanner";
 import { CountryCard } from "@/components/CountryCard";
@@ -34,17 +33,102 @@ export default async function CountryPage({ params }: Props) {
 
   const others = countries.filter((c) => c.slug !== country.slug);
   const applyHref = `/contact?country=${encodeURIComponent(country.name)}&countrySlug=${country.slug}`;
+  const isChina = country.slug === "china";
+
+  const groups: Record<
+    string,
+    { title: string; color: string; accent: string; checkColor: string; items: string[] }
+  > = {
+    personal: {
+      title: "Personal & Travel Documents",
+      color: "from-teal/10 to-teal/5 border-teal/20",
+      accent: "text-teal",
+      checkColor: "text-teal",
+      items: [],
+    },
+    business: {
+      title: "Business & Professional",
+      color: "from-gold/10 to-gold/5 border-gold/20",
+      accent: "text-[#b38e1e]",
+      checkColor: "text-[#b38e1e]",
+      items: [],
+    },
+    financial: {
+      title: "Financial Documents",
+      color: "from-blue-500/10 to-blue-500/5 border-blue-500/20",
+      accent: "text-blue-600",
+      checkColor: "text-blue-600",
+      items: [],
+    },
+    other: {
+      title: "Other Requirements",
+      color: "from-emerald-500/10 to-emerald-500/5 border-emerald-500/20",
+      accent: "text-emerald-600",
+      checkColor: "text-emerald-600",
+      items: [],
+    },
+  };
+
+  country.documentsRequired.forEach((doc) => {
+    const l = doc.toLowerCase();
+    if (
+      l.includes("passport") ||
+      l.includes("photo") ||
+      l.includes("picture") ||
+      l.includes("visa") ||
+      l.includes("nid") ||
+      l.includes("form")
+    ) {
+      groups.personal.items.push(doc);
+    } else if (
+      l.includes("solvency") ||
+      l.includes("bank") ||
+      l.includes("financial")
+    ) {
+      groups.financial.items.push(doc);
+    } else if (
+      l.includes("trade") ||
+      l.includes("noc") ||
+      l.includes("tin") ||
+      l.includes("job") ||
+      l.includes("businessman") ||
+      l.includes("student") ||
+      l.includes("letter") ||
+      l.includes("visiting card") ||
+      l.includes("employment") ||
+      l.includes("academic")
+    ) {
+      groups.business.items.push(doc);
+    } else {
+      groups.other.items.push(doc);
+    }
+  });
+
+  const docGroups = Object.values(groups).filter((g) => g.items.length > 0);
 
   return (
     <>
       <section className="relative overflow-hidden bg-hero-atmosphere py-14 text-white sm:py-16">
         <div className="pointer-events-none absolute inset-0 bg-section-pattern-dark opacity-60" aria-hidden />
         <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/55">
-            {country.region}
-          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/55">
+              {country.region}
+            </p>
+            {isChina ? (
+              <span className="inline-flex items-center gap-1 rounded-full bg-gold px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-navy-deep">
+                <Flame className="size-3" />
+                Trending
+              </span>
+            ) : null}
+          </div>
           <div className="mt-6 flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
-            <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 border-white/20 bg-white/10 shadow-lg">
+            <div
+              className={cn(
+                "flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 bg-white/10 shadow-lg",
+                isChina ? "border-gold/50" : "border-white/20",
+              )}
+            >
               <img
                 src={getCountryFlagUrl(country.slug)}
                 alt={`${country.name} flag`}
@@ -68,6 +152,17 @@ export default async function CountryPage({ params }: Props) {
                   </span>
                 ))}
               </div>
+              {isChina ? (
+                <Link
+                  href="/canton-fair"
+                  className={cn(
+                    buttonVariants(),
+                    "mt-5 inline-flex bg-gold text-navy-deep hover:bg-gold/90",
+                  )}
+                >
+                  Also going to Canton Fair?
+                </Link>
+              ) : null}
             </div>
           </div>
         </div>
@@ -91,36 +186,58 @@ export default async function CountryPage({ params }: Props) {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-2">
-          <div>
+        <div className="mt-12 grid gap-10 lg:grid-cols-[1.2fr_1fr] xl:grid-cols-[1.5fr_1fr]">
+          <div className="flex flex-col gap-5">
             <h2 className="font-display text-2xl text-navy">Documents required</h2>
-            <ul className="mt-6 space-y-3">
-              {country.documentsRequired.map((doc) => (
-                <li key={doc} className="flex gap-3 text-sm text-navy/85">
-                  <Check className="mt-0.5 size-4 shrink-0 text-teal" />
-                  {doc}
-                </li>
-              ))}
-            </ul>
+            {docGroups.map((group) => (
+              <div
+                key={group.title}
+                className={cn(
+                  "rounded-xl border bg-gradient-to-br p-5 shadow-sm",
+                  group.color,
+                )}
+              >
+                <h3
+                  className={cn(
+                    "mb-3 font-display text-base font-semibold",
+                    group.accent,
+                  )}
+                >
+                  {group.title}
+                </h3>
+                <ul className="space-y-2.5">
+                  {group.items.map((item) => (
+                    <li key={item} className="flex gap-3 text-sm text-navy/80">
+                      <Check
+                        className={cn("mt-0.5 size-4 shrink-0", group.checkColor)}
+                      />
+                      <span className="leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
-          <div className="rounded-2xl border border-border bg-card p-6 sm:p-8">
-            <h2 className="font-display text-2xl text-navy">Important notes</h2>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              {country.notes}
-            </p>
-            <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-              Embassy rules change. We always reconfirm the latest checklist and fee
-              before your application is submitted.
-            </p>
-            <Link
-              href={applyHref}
-              className={cn(
-                buttonVariants({ size: "lg" }),
-                "mt-8 bg-gold text-navy-deep hover:bg-gold/90",
-              )}
-            >
-              Apply Now
-            </Link>
+          <div>
+            <div className="rounded-2xl border border-border bg-card p-6 sm:p-8">
+              <h2 className="font-display text-2xl text-navy">Important notes</h2>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                {country.notes}
+              </p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                Embassy rules change. We always reconfirm the latest checklist and fee
+                before your application is submitted.
+              </p>
+              <Link
+                href={applyHref}
+                className={cn(
+                  buttonVariants({ size: "lg" }),
+                  "mt-8 w-full bg-gold text-navy-deep hover:bg-gold/90",
+                )}
+              >
+                Apply Now
+              </Link>
+            </div>
           </div>
         </div>
       </LightSection>
