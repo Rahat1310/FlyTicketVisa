@@ -42,8 +42,7 @@ export const countries: Country[] = [
     flag: "🇮🇳",
     region: "South Asia",
     visaTypes: ["Tourist", "Medical", "Business"],
-    summary:
-      "India tourist, medical, and business visa guidance for travelers from Bangladesh.",
+    summary: "India tourist, medical, and business visa guidance for travelers from Bangladesh.",
     documentsRequired: [
       "Valid passport",
       "Passport photos",
@@ -53,8 +52,7 @@ export const countries: Country[] = [
     ],
     fee: "Affordable entry — ask for today’s rate",
     processingTime: "Often 3–10 working days",
-    notes:
-      "Medical travelers should share hospital appointment letters early for smoother filing.",
+    notes: "Medical travelers should share hospital appointment letters early for smoother filing.",
   },
   {
     slug: "thailand",
@@ -165,8 +163,7 @@ export const countries: Country[] = [
     flag: "🇪🇬",
     region: "Middle East / North Africa",
     visaTypes: ["Tourist", "Business"],
-    summary:
-      "Egypt tourist and business visa support for travelers from Bangladesh.",
+    summary: "Egypt tourist and business visa support for travelers from Bangladesh.",
     documentsRequired: [
       "Valid passport",
       "Passport photos",
@@ -185,8 +182,7 @@ export const countries: Country[] = [
     flag: "🇭🇰",
     region: "East Asia",
     visaTypes: ["Tourist", "Business"],
-    summary:
-      "Hong Kong visit and business visa documentation support for BD applicants.",
+    summary: "Hong Kong visit and business visa documentation support for BD applicants.",
     documentsRequired: [
       "Valid passport",
       "Passport photos",
@@ -196,8 +192,7 @@ export const countries: Country[] = [
     ],
     fee: "Confirmed per application type",
     processingTime: "Typically 5–15 working days",
-    notes:
-      "A clear itinerary and financial proof help reduce delays.",
+    notes: "A clear itinerary and financial proof help reduce delays.",
   },
   {
     slug: "turkey",
@@ -205,8 +200,7 @@ export const countries: Country[] = [
     flag: "🇹🇷",
     region: "Europe / Middle East",
     visaTypes: ["Tourist", "Business", "Student"],
-    summary:
-      "Turkey tourist, business, and student visa guidance for Bangladeshi travelers.",
+    summary: "Turkey tourist, business, and student visa guidance for Bangladeshi travelers.",
     documentsRequired: [
       "Valid passport",
       "Passport photos",
@@ -225,8 +219,7 @@ export const countries: Country[] = [
     flag: "🇮🇩",
     region: "Southeast Asia",
     visaTypes: ["Tourist", "Business"],
-    summary:
-      "Indonesia tourist and business visa support for travelers from Bangladesh.",
+    summary: "Indonesia tourist and business visa support for travelers from Bangladesh.",
     documentsRequired: [
       "Valid passport",
       "Passport photos",
@@ -245,8 +238,7 @@ export const countries: Country[] = [
     flag: "🇵🇭",
     region: "Southeast Asia",
     visaTypes: ["Tourist", "Business"],
-    summary:
-      "Philippines tourist and business visa documentation help for BD nationals.",
+    summary: "Philippines tourist and business visa documentation help for BD nationals.",
     documentsRequired: [
       "Valid passport",
       "Application form & photos",
@@ -256,8 +248,7 @@ export const countries: Country[] = [
     ],
     fee: "Confirmed on inquiry",
     processingTime: "Often 5–15 working days",
-    notes:
-      "Incomplete hotel or flight plans are a common delay — we help tighten your file.",
+    notes: "Incomplete hotel or flight plans are a common delay — we help tighten your file.",
   },
   {
     slug: "south-korea",
@@ -326,7 +317,5 @@ export function getCountryBySlug(slug: string): Country | undefined {
 }
 
 export function getCountriesBySlugs(slugs: string[]): Country[] {
-  return slugs
-    .map((slug) => getCountryBySlug(slug))
-    .filter((c): c is Country => Boolean(c));
+  return slugs.map((slug) => getCountryBySlug(slug)).filter((c): c is Country => Boolean(c));
 }

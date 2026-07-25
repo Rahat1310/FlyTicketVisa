@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
-import { siteConfig, getWhatsAppUrl } from "@/lib/site";
 import { buttonVariants } from "@/components/ui/button";
+import { getWhatsAppUrl, siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 const visaServices = [
@@ -28,11 +28,11 @@ export function Header() {
   const [visaOpen, setVisaOpen] = useState(false);
   const [desktopVisaOpen, setDesktopVisaOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  
+
   const desktopDropdownRef = useRef<HTMLDivElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
-  
+
   // Handle Scroll
   useEffect(() => {
     const handleScroll = () => {
@@ -60,25 +60,25 @@ export function Header() {
   // Handle Mobile Drawer Focus Trapping & Escape
   useEffect(() => {
     if (!open) return;
-    
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setOpen(false);
         return;
       }
-      
+
       if (e.key === "Tab") {
         if (!drawerRef.current) return;
-        
+
         const focusableElements = drawerRef.current.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
         );
-        
+
         if (focusableElements.length === 0) return;
-        
+
         const firstElement = focusableElements[0];
         const lastElement = focusableElements[focusableElements.length - 1];
-        
+
         if (e.shiftKey) {
           if (document.activeElement === firstElement) {
             lastElement.focus();
@@ -92,15 +92,16 @@ export function Header() {
         }
       }
     };
-    
+
     document.addEventListener("keydown", handleKeyDown);
     document.body.style.overflow = "hidden"; // Prevent background scrolling
-    
+    const hamburgerEl = hamburgerRef.current;
+
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
       // Return focus
-      hamburgerRef.current?.focus();
+      hamburgerEl?.focus();
     };
   }, [open]);
 
@@ -111,16 +112,19 @@ export function Header() {
 
   return (
     <>
-      <header 
+      <header
         className={cn(
           "fixed w-full top-0 z-40 border-b border-transparent transition-all duration-300",
-          isScrolled 
-            ? "bg-navy-deep/95 backdrop-blur-md border-white/10 shadow-md" 
-            : "bg-navy-deep/0"
+          isScrolled
+            ? "bg-navy-deep/95 backdrop-blur-md border-white/10 shadow-md"
+            : "bg-navy-deep/0",
         )}
       >
         <div className="container-fluid flex h-16 items-center justify-between">
-          <Link href="/" className="inline-flex min-h-[44px] min-w-[44px] items-center font-display text-xl tracking-tight text-white sm:text-2xl">
+          <Link
+            href="/"
+            className="inline-flex min-h-[44px] min-w-[44px] items-center font-display text-xl tracking-tight text-white sm:text-2xl"
+          >
             {siteConfig.name}
           </Link>
 
@@ -132,19 +136,21 @@ export function Header() {
                 type="button"
                 className={cn(
                   "inline-flex min-h-[44px] min-w-[44px] items-center gap-1 transition-colors hover:text-white",
-                  desktopVisaOpen && "text-white"
+                  desktopVisaOpen && "text-white",
                 )}
                 aria-haspopup="menu"
                 aria-expanded={desktopVisaOpen}
                 onClick={() => setDesktopVisaOpen(!desktopVisaOpen)}
               >
                 Visa service
-                <ChevronDown className={cn("size-3.5 transition-transform", desktopVisaOpen && "rotate-180")} />
+                <ChevronDown
+                  className={cn("size-3.5 transition-transform", desktopVisaOpen && "rotate-180")}
+                />
               </button>
-              <div 
+              <div
                 className={cn(
                   "absolute left-0 top-full z-50 pt-2 transition-all",
-                  desktopVisaOpen ? "visible opacity-100" : "invisible opacity-0"
+                  desktopVisaOpen ? "visible opacity-100" : "invisible opacity-0",
                 )}
               >
                 <ul className="min-w-[200px] rounded-xl border border-white/10 bg-navy-deep/95 py-2 shadow-xl backdrop-blur-md">
@@ -216,8 +222,8 @@ export function Header() {
 
       {/* Mobile Drawer Overlay */}
       {open && (
-        <div 
-          className="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm transition-opacity lg:hidden" 
+        <div
+          className="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm transition-opacity lg:hidden"
           onClick={closeMobile}
           aria-hidden="true"
         />
@@ -231,11 +237,15 @@ export function Header() {
         aria-label="Mobile Navigation"
         className={cn(
           "fixed inset-y-0 right-0 z-[100] flex w-full max-w-sm flex-col border-l border-white/10 bg-navy-deep text-white shadow-2xl transition-transform duration-300 ease-in-out lg:hidden",
-          open ? "translate-x-0" : "translate-x-full"
+          open ? "translate-x-0" : "translate-x-full",
         )}
       >
         <div className="flex h-16 items-center justify-between px-4 sm:px-6 border-b border-white/10">
-          <Link href="/" className="inline-flex min-h-[44px] items-center font-display text-xl tracking-tight" onClick={closeMobile}>
+          <Link
+            href="/"
+            className="inline-flex min-h-[44px] items-center font-display text-xl tracking-tight"
+            onClick={closeMobile}
+          >
             {siteConfig.name}
           </Link>
           <button
@@ -284,9 +294,7 @@ export function Header() {
                   href={link.href}
                   className={cn(
                     "flex min-h-[44px] items-center rounded-md px-3 py-2.5 text-sm hover:bg-white/5",
-                    isHot
-                      ? "animate-nav-trending font-semibold text-gold"
-                      : "text-white/85",
+                    isHot ? "animate-nav-trending font-semibold text-gold" : "text-white/85",
                   )}
                   onClick={closeMobile}
                 >

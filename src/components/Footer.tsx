@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { siteConfig, getWhatsAppUrl } from "@/lib/site";
 import { services } from "@/lib/services";
+import { getWhatsAppUrl, siteConfig } from "@/lib/site";
 
 function FooterNavColumn({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -42,9 +42,7 @@ export function Footer() {
       <div className="container-fluid grid gap-0 md:gap-10 py-14 md:grid-cols-2 lg:grid-cols-12">
         <div className="pb-8 md:pb-0 lg:col-span-3 border-b border-white/10 md:border-none">
           <p className="font-display text-2xl">{siteConfig.name}</p>
-          <p className="mt-3 text-sm leading-relaxed text-white/65">
-            {siteConfig.tagline}
-          </p>
+          <p className="mt-3 text-sm leading-relaxed text-white/65">{siteConfig.tagline}</p>
         </div>
 
         <FooterNavColumn title="Services">
@@ -65,27 +63,42 @@ export function Footer() {
         <FooterNavColumn title="Explore">
           <ul className="flex flex-col text-sm text-white/65">
             <li>
-              <Link href="/about" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white">
+              <Link
+                href="/about"
+                className="inline-flex min-h-[44px] items-center transition-colors hover:text-white"
+              >
                 About & trust
               </Link>
             </li>
             <li>
-              <Link href="/testimonials" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white">
+              <Link
+                href="/testimonials"
+                className="inline-flex min-h-[44px] items-center transition-colors hover:text-white"
+              >
                 Testimonials
               </Link>
             </li>
             <li>
-              <Link href="/contact" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white">
+              <Link
+                href="/contact"
+                className="inline-flex min-h-[44px] items-center transition-colors hover:text-white"
+              >
                 Contact / Inquiry
               </Link>
             </li>
             <li>
-              <Link href="/countries" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white">
+              <Link
+                href="/countries"
+                className="inline-flex min-h-[44px] items-center transition-colors hover:text-white"
+              >
                 Country visas
               </Link>
             </li>
             <li>
-              <Link href="/services" className="inline-flex min-h-[44px] items-center transition-colors hover:text-white">
+              <Link
+                href="/services"
+                className="inline-flex min-h-[44px] items-center transition-colors hover:text-white"
+              >
                 All services
               </Link>
             </li>
@@ -95,7 +108,10 @@ export function Footer() {
         <FooterNavColumn title="Contact">
           <ul className="flex flex-col text-sm text-white/65">
             <li>
-              <a href={siteConfig.phoneHref} className="inline-flex min-h-[44px] items-center transition-colors hover:text-white">
+              <a
+                href={siteConfig.phoneHref}
+                className="inline-flex min-h-[44px] items-center transition-colors hover:text-white"
+              >
                 {siteConfig.phone}
               </a>
             </li>
@@ -110,7 +126,10 @@ export function Footer() {
               </a>
             </li>
             <li>
-              <a href={`mailto:${siteConfig.email}`} className="inline-flex min-h-[44px] items-center transition-colors hover:text-white">
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="inline-flex min-h-[44px] items-center transition-colors hover:text-white"
+              >
                 {siteConfig.email}
               </a>
             </li>

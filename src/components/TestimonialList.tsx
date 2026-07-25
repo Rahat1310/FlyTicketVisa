@@ -1,15 +1,12 @@
 import { Star, User } from "lucide-react";
 import { SiteImage } from "@/components/SiteImage";
-import { testimonials, type Testimonial } from "@/lib/testimonials";
+import { type Testimonial, testimonials } from "@/lib/testimonials";
 
 function Rating({ value }: { value: number }) {
   return (
     <div className="flex gap-0.5" aria-label={`${value} out of 5 stars`}>
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className={`size-3.5 ${i < value ? "fill-gold text-gold" : "text-border"}`}
-        />
+        <Star key={i} className={`size-3.5 ${i < value ? "fill-gold text-gold" : "text-border"}`} />
       ))}
     </div>
   );

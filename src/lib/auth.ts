@@ -2,10 +2,7 @@ import { prisma } from "@/lib/db";
 import { generateUploadToken, getTokenExpiry } from "@/lib/upload-token";
 
 export function isClerkConfigured() {
-  return Boolean(
-    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY &&
-      process.env.CLERK_SECRET_KEY,
-  );
+  return Boolean(process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && process.env.CLERK_SECRET_KEY);
 }
 
 export async function requireAdmin() {

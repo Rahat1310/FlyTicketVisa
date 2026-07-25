@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CompactHero } from "@/components/CompactHero";
-import { LightSection } from "@/components/LightSection";
 import { LeadStatusSelect } from "@/components/LeadStatusSelect";
+import { LightSection } from "@/components/LightSection";
 import { buttonVariants } from "@/components/ui/button";
 import { prisma } from "@/lib/db";
-import { documentTypeLabel } from "@/lib/uploads";
 import { getWhatsAppUrl, siteConfig } from "@/lib/site";
+import { documentTypeLabel } from "@/lib/uploads";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -35,11 +35,10 @@ export default async function AdminLeadPage({ params }: PageProps) {
 
   if (!lead) notFound();
 
-  const uploadLink =
-    lead.uploadToken &&
-    (!lead.tokenExpiresAt || lead.tokenExpiresAt.getTime() > Date.now())
-      ? `/upload/${lead.uploadToken}`
-      : null;
+  // eslint-disable-next-line react-hooks/purity -- server component; Date.now() is safe here
+  const now = Date.now();
+  const isTokenValid = !lead.tokenExpiresAt || lead.tokenExpiresAt.getTime() > now;
+  const uploadLink = lead.uploadToken && isTokenValid ? `/upload/${lead.uploadToken}` : null;
 
   return (
     <>
@@ -50,10 +49,7 @@ export default async function AdminLeadPage({ params }: PageProps) {
       />
       <LightSection>
         <div className="mb-6">
-          <Link
-            href="/admin"
-            className={cn(buttonVariants({ variant: "outline", size: "sm" }))}
-          >
+          <Link href="/admin" className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>
             ← All leads
           </Link>
         </div>
@@ -123,17 +119,15 @@ export default async function AdminLeadPage({ params }: PageProps) {
                 </a>
               ) : (
                 <p className="text-xs text-muted-foreground">
-                  Upload token missing or expired — ask them to inquire again or
-                  send files on WhatsApp.
+                  Upload token missing or expired — ask them to inquire again or send files on
+                  WhatsApp.
                 </p>
               )}
             </div>
           </div>
 
           <div className="rounded-2xl border border-border bg-card p-6">
-            <h2 className="font-display text-xl text-navy">
-              Documents ({lead.uploads.length})
-            </h2>
+            <h2 className="font-display text-xl text-navy">Documents ({lead.uploads.length})</h2>
             <p className="mt-1 text-xs text-muted-foreground">
               Private files — download via authenticated admin route only.
             </p>
@@ -153,18 +147,14 @@ export default async function AdminLeadPage({ params }: PageProps) {
                       <p className="text-sm font-medium text-navy">{file.fileName}</p>
                       <p className="text-xs text-muted-foreground">
                         {documentTypeLabel(file.documentType)}
-                        {file.sizeBytes
-                          ? ` · ${(file.sizeBytes / 1024).toFixed(0)} KB`
-                          : ""}
+                        {file.sizeBytes ? ` · ${(file.sizeBytes / 1024).toFixed(0)} KB` : ""}
                         {" · "}
                         {file.uploadedAt.toLocaleString("en-BD")}
                       </p>
                     </div>
                     <a
                       href={`/api/admin/files/${file.id}`}
-                      className={cn(
-                        buttonVariants({ size: "sm", variant: "outline" }),
-                      )}
+                      className={cn(buttonVariants({ size: "sm", variant: "outline" }))}
                     >
                       Download
                     </a>
@@ -173,9 +163,7 @@ export default async function AdminLeadPage({ params }: PageProps) {
               </ul>
             )}
 
-            <p className="mt-6 text-xs text-muted-foreground">
-              Inbox: {siteConfig.email}
-            </p>
+            <p className="mt-6 text-xs text-muted-foreground">Inbox: {siteConfig.email}</p>
           </div>
         </div>
       </LightSection>

@@ -5,9 +5,9 @@ import { CheckCircle2, Loader2, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { uploadDocument } from "@/lib/actions/upload";
+import type { ChecklistSlot } from "@/lib/checklist";
 import { DOCUMENT_TYPES, type DocumentType } from "@/lib/uploads";
 import { documentTypeLabel } from "@/lib/uploads";
-import type { ChecklistSlot } from "@/lib/checklist";
 import { cn } from "@/lib/utils";
 
 type ExistingUpload = {
@@ -23,11 +23,7 @@ type UploadClientProps = {
   initialUploads: ExistingUpload[];
 };
 
-export function UploadClient({
-  token,
-  slots,
-  initialUploads,
-}: UploadClientProps) {
+export function UploadClient({ token, slots, initialUploads }: UploadClientProps) {
   const [uploads, setUploads] = useState(initialUploads);
   const [activeSlot, setActiveSlot] = useState(slots[0]?.id ?? "extra");
   const [documentType, setDocumentType] = useState<DocumentType>(
@@ -71,14 +67,11 @@ export function UploadClient({
       <div>
         <h2 className="font-display text-xl text-navy">Document checklist</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Tap an item, choose the matching type, then upload a PDF or photo
-          (max 8 MB).
+          Tap an item, choose the matching type, then upload a PDF or photo (max 8 MB).
         </p>
         <ul className="mt-4 space-y-2">
           {slots.map((slot) => {
-            const done = uploads.some(
-              (u) => u.documentType === slot.suggestedType,
-            );
+            const done = uploads.some((u) => u.documentType === slot.suggestedType);
             return (
               <li key={slot.id}>
                 <button
@@ -101,9 +94,7 @@ export function UploadClient({
                   >
                     {done ? "✓" : ""}
                   </span>
-                  <span className="text-sm leading-snug text-navy">
-                    {slot.label}
-                  </span>
+                  <span className="text-sm leading-snug text-navy">{slot.label}</span>
                 </button>
               </li>
             );
@@ -160,11 +151,7 @@ export function UploadClient({
           disabled={isPending}
           className="w-full gap-2 bg-gold text-navy-deep hover:bg-gold/90 sm:w-auto"
         >
-          {isPending ? (
-            <Loader2 className="size-4 animate-spin" />
-          ) : (
-            <Upload className="size-4" />
-          )}
+          {isPending ? <Loader2 className="size-4 animate-spin" /> : <Upload className="size-4" />}
           {isPending ? "Uploading…" : "Upload document"}
         </Button>
       </form>
@@ -192,8 +179,8 @@ export function UploadClient({
       ) : null}
 
       <p className="text-xs leading-relaxed text-muted-foreground">
-        Privacy: documents are used only for visa / ticket processing with{" "}
-        Fly & Visa point. Do not share this upload link publicly.
+        Privacy: documents are used only for visa / ticket processing with Fly & Visa point. Do not
+        share this upload link publicly.
       </p>
     </div>
   );

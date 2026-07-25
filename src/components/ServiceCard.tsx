@@ -1,14 +1,14 @@
 import Link from "next/link";
 import {
-  GraduationCap,
-  Plane,
-  Briefcase,
-  Stethoscope,
-  Palmtree,
-  MoonStar,
   ArrowRight,
+  Briefcase,
   Building2,
+  GraduationCap,
   type LucideIcon,
+  MoonStar,
+  Palmtree,
+  Plane,
+  Stethoscope,
 } from "lucide-react";
 import type { Service, ServiceSlug } from "@/lib/services";
 import { cn } from "@/lib/utils";
@@ -32,8 +32,7 @@ type ServiceCardProps = {
 export function ServiceCard({ service, index = 0, className }: ServiceCardProps) {
   const Icon = serviceIcons[service.slug];
   const featured = service.slug === "canton-fair";
-  const href =
-    service.slug === "canton-fair" ? "/canton-fair" : `/services/${service.slug}`;
+  const href = service.slug === "canton-fair" ? "/canton-fair" : `/services/${service.slug}`;
 
   return (
     <Link

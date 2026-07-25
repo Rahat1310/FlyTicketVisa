@@ -1,15 +1,15 @@
 "use client";
 
-import { useState, useTransition, type FormEvent } from "react";
 import Link from "next/link";
+import { type FormEvent, useState, useTransition } from "react";
 import { CheckCircle2, MessageCircle, Upload } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { submitInquiry } from "@/lib/actions/inquiry";
-import { services } from "@/lib/services";
 import { countries } from "@/lib/data/countries";
+import { services } from "@/lib/services";
 import { getWhatsAppUrl, siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -18,10 +18,7 @@ type InquiryFormProps = {
   defaultCountry?: string;
 };
 
-export function InquiryForm({
-  defaultService = "",
-  defaultCountry = "",
-}: InquiryFormProps) {
+export function InquiryForm({ defaultService = "", defaultCountry = "" }: InquiryFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [submittedService, setSubmittedService] = useState("");
   const [uploadToken, setUploadToken] = useState<string | undefined>();
@@ -67,8 +64,8 @@ export function InquiryForm({
         <CheckCircle2 className="mx-auto size-12 text-teal" />
         <h3 className="mt-4 font-display text-2xl text-navy">Inquiry received</h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          Thank you, {name}. We&apos;ve saved your details and sent a notification to our
-          team. For a faster reply, message us on WhatsApp.
+          Thank you, {name}. We&apos;ve saved your details and sent a notification to our team. For
+          a faster reply, message us on WhatsApp.
         </p>
         <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           {uploadToken ? (
@@ -100,8 +97,8 @@ export function InquiryForm({
         </div>
         {uploadToken ? (
           <p className="mt-3 text-xs text-muted-foreground">
-            Optional — upload after we chat, or now if you already have your papers ready.
-            This private link expires in 7 days.
+            Optional — upload after we chat, or now if you already have your papers ready. This
+            private link expires in 7 days.
           </p>
         ) : null}
         <p className="mt-4 text-xs text-muted-foreground">

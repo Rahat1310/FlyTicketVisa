@@ -1,7 +1,7 @@
 "use client";
 
+import { type ReactNode } from "react";
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
 
 interface FadeInProps {
   children: ReactNode;
@@ -32,7 +32,15 @@ export function FadeIn({ children, delay = 0, direction = "up", className }: Fad
   );
 }
 
-export function AnimatedText({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
+export function AnimatedText({
+  text,
+  className,
+  delay = 0,
+}: {
+  text: string;
+  className?: string;
+  delay?: number;
+}) {
   return (
     <motion.span
       className={className}
@@ -50,7 +58,12 @@ export function AnimatedText({ text, className, delay = 0 }: { text: string; cla
           className="inline-block"
           variants={{
             hidden: { opacity: 0, y: 20, rotateX: 90 },
-            visible: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] } },
+            visible: {
+              opacity: 1,
+              y: 0,
+              rotateX: 0,
+              transition: { duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] },
+            },
           }}
         >
           {char === " " ? "\u00A0" : char}
@@ -60,7 +73,17 @@ export function AnimatedText({ text, className, delay = 0 }: { text: string; cla
   );
 }
 
-export function TypewriterGroup({ children, className, delay = 0, speed = 0.04 }: { children: ReactNode; className?: string; delay?: number; speed?: number }) {
+export function TypewriterGroup({
+  children,
+  className,
+  delay = 0,
+  speed = 0.04,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+  speed?: number;
+}) {
   return (
     <motion.span
       className={className}
@@ -86,11 +109,11 @@ export function TypewriterPart({ text, className }: { text: string; className?: 
           className="inline-block"
           variants={{
             hidden: { opacity: 0, filter: "blur(4px)", y: 2 },
-            visible: { 
-              opacity: 1, 
-              filter: "blur(0px)", 
+            visible: {
+              opacity: 1,
+              filter: "blur(0px)",
               y: 0,
-              transition: { duration: 0.2, ease: "easeOut" }
+              transition: { duration: 0.2, ease: "easeOut" },
             },
           }}
         >

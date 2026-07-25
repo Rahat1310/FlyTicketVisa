@@ -1,8 +1,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { prisma } from "@/lib/db";
 import { requireAdmin } from "@/lib/auth";
+import { prisma } from "@/lib/db";
 
 const ALLOWED_STATUSES = new Set(["new", "contacted", "in_progress", "closed"]);
 

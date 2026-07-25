@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { MapPin } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
 import { AnimatedText } from "@/components/Animations";
 import { FadeIn } from "@/components/Animations";
+import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 

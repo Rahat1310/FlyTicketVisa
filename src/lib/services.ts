@@ -24,8 +24,7 @@ export const services: Service[] = [
     slug: "umrah-package",
     title: "Umrah Package",
     shortTitle: "Umrah",
-    summary:
-      "Guided Umrah packages with visa, flights, and hotel coordination for Saudi Arabia.",
+    summary: "Guided Umrah packages with visa, flights, and hotel coordination for Saudi Arabia.",
     description:
       "Plan your Umrah journey with clear documentation support, flight booking, and hotel arrangements. We help Bangladeshi pilgrims prepare paperwork correctly and travel with confidence.",
     highlights: [
@@ -65,14 +64,7 @@ export const services: Service[] = [
       "Bank statements / financial proof",
       "English / language test results if required",
     ],
-    relatedCountries: [
-      "malaysia",
-      "china",
-      "japan",
-      "south-korea",
-      "turkey",
-      "america",
-    ],
+    relatedCountries: ["malaysia", "china", "japan", "south-korea", "turkey", "america"],
     cta: "Start a student visa inquiry",
   },
   {
@@ -118,8 +110,7 @@ export const services: Service[] = [
     slug: "business-visa",
     title: "Business Visa",
     shortTitle: "Business",
-    summary:
-      "Invitation-letter based business travel visas with professional document review.",
+    summary: "Invitation-letter based business travel visas with professional document review.",
     description:
       "For meetings, trade fairs, and company visits, we help assemble invitation letters, company papers, and supporting documents so your business travel plans stay on schedule.",
     highlights: [
@@ -154,8 +145,7 @@ export const services: Service[] = [
     slug: "medical-visa",
     title: "Medical Visa",
     shortTitle: "Medical",
-    summary:
-      "Medical treatment travel support with hospital appointment and document assistance.",
+    summary: "Medical treatment travel support with hospital appointment and document assistance.",
     description:
       "When treatment abroad is needed, timing matters. We help patients and attendants prepare medical visa documents, appointment letters, and travel arrangements with care and clarity.",
     highlights: [
@@ -178,8 +168,7 @@ export const services: Service[] = [
     slug: "air-ticket",
     title: "Air Ticket",
     shortTitle: "Air Ticket",
-    summary:
-      "Competitive air ticket booking for one-way, return, and multi-city itineraries.",
+    summary: "Competitive air ticket booking for one-way, return, and multi-city itineraries.",
     description:
       "Need flights for Umrah, study, tourism, or emergency travel? We search routes and fare options, then confirm tickets that fit your dates and budget — with clear change/cancellation notes.",
     highlights: [
@@ -202,8 +191,7 @@ export const services: Service[] = [
     slug: "canton-fair",
     title: "Canton Fair",
     shortTitle: "Canton Fair",
-    summary:
-      "Specialized visa and travel support for attending the China Canton Fair.",
+    summary: "Specialized visa and travel support for attending the China Canton Fair.",
     description:
       "Maximize your business opportunities at the Canton Fair. We handle your Chinese business visa, flight bookings, and hotel arrangements so you can focus on sourcing and networking.",
     highlights: [

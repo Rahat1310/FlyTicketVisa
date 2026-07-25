@@ -1,15 +1,15 @@
 "use server";
 
 import { put } from "@vercel/blob";
-import { prisma } from "@/lib/db";
 import { getLeadByUploadToken } from "@/lib/auth";
+import { prisma } from "@/lib/db";
 import { sendDocumentsUploadedNotification } from "@/lib/email";
 import {
   DOCUMENT_TYPES,
-  MAX_UPLOAD_BYTES,
-  MAX_UPLOADS_PER_LEAD,
-  isAllowedMimeType,
   type DocumentType,
+  MAX_UPLOADS_PER_LEAD,
+  MAX_UPLOAD_BYTES,
+  isAllowedMimeType,
 } from "@/lib/uploads";
 
 export type UploadDocumentResult =
@@ -24,9 +24,7 @@ export type UploadDocumentResult =
     }
   | { ok: false; error: string };
 
-const ALLOWED_TYPES = new Set(
-  DOCUMENT_TYPES.map((t) => t.value),
-) as Set<string>;
+const ALLOWED_TYPES = new Set(DOCUMENT_TYPES.map((t) => t.value)) as Set<string>;
 
 /** Simple per-token rate limit (in-memory; best-effort on serverless). */
 const uploadHits = new Map<string, { count: number; windowStart: number }>();

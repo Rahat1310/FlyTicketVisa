@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
+import { CTABanner } from "@/components/CTABanner";
 import { CompactHero } from "@/components/CompactHero";
 import { LightSection } from "@/components/LightSection";
 import { TestimonialList } from "@/components/TestimonialList";
-import { CTABanner } from "@/components/CTABanner";
 
 export const metadata: Metadata = {
   title: "Testimonials",
-  description:
-    "What clients say about our visa processing and air ticket support from Bangladesh.",
+  description: "What clients say about our visa processing and air ticket support from Bangladesh.",
 };
 
 export default function TestimonialsPage() {

@@ -1,8 +1,8 @@
 "use server";
 
+import { createLeadUploadTokenFields } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { sendLeadNotification } from "@/lib/email";
-import { createLeadUploadTokenFields } from "@/lib/auth";
 
 export type InquiryPayload = {
   name: string;
@@ -14,12 +14,9 @@ export type InquiryPayload = {
 };
 
 export type SubmitInquiryResult =
-  | { ok: true; service: string; uploadToken?: string }
-  | { ok: false; error: string };
+  { ok: true; service: string; uploadToken?: string } | { ok: false; error: string };
 
-export async function submitInquiry(
-  payload: InquiryPayload,
-): Promise<SubmitInquiryResult> {
+export async function submitInquiry(payload: InquiryPayload): Promise<SubmitInquiryResult> {
   if (!payload.name.trim() || !payload.phone.trim() || !payload.service.trim()) {
     return { ok: false, error: "Name, phone, and service are required." };
   }

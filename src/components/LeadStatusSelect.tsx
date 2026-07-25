@@ -10,13 +10,7 @@ const STATUSES = [
   { value: "closed", label: "Closed" },
 ];
 
-export function LeadStatusSelect({
-  leadId,
-  status,
-}: {
-  leadId: string;
-  status: string;
-}) {
+export function LeadStatusSelect({ leadId, status }: { leadId: string; status: string }) {
   const [isPending, startTransition] = useTransition();
 
   return (

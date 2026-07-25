@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import { CTABanner } from "@/components/CTABanner";
 import { CompactHero } from "@/components/CompactHero";
 import { LightSection } from "@/components/LightSection";
-import { ServiceGrid } from "@/components/ServiceGrid";
-import { CTABanner } from "@/components/CTABanner";
 import { SectionHeading } from "@/components/SectionHeading";
+import { ServiceGrid } from "@/components/ServiceGrid";
 
 export const metadata: Metadata = {
   title: "Visa & Travel Services",

@@ -10,17 +10,13 @@ type LeadEmailPayload = {
   message?: string;
 };
 
-export type SendEmailResult =
-  | { ok: true }
-  | { ok: false; error: string };
+export type SendEmailResult = { ok: true } | { ok: false; error: string };
 
 function getBrevoConfig() {
   const apiKey = process.env.BREVO_API_KEY?.trim();
   const inbox = process.env.AGENCY_INBOX_EMAIL ?? siteConfig.email;
-  const fromEmail =
-    process.env.BREVO_FROM_EMAIL?.trim() || siteConfig.email;
-  const fromName =
-    process.env.BREVO_FROM_NAME?.trim() || siteConfig.name;
+  const fromEmail = process.env.BREVO_FROM_EMAIL?.trim() || siteConfig.email;
+  const fromName = process.env.BREVO_FROM_NAME?.trim() || siteConfig.name;
 
   return { apiKey, inbox, fromEmail, fromName };
 }
@@ -36,8 +32,7 @@ async function sendBrevoEmail(options: {
     console.warn("BREVO_API_KEY not set — skipping email.");
     return {
       ok: false,
-      error:
-        "Email is not configured yet (missing BREVO_API_KEY in .env.local).",
+      error: "Email is not configured yet (missing BREVO_API_KEY in .env.local).",
     };
   }
 
@@ -65,13 +60,12 @@ async function sendBrevoEmail(options: {
 
     if (!response.ok) {
       const message =
-        body?.message ||
-        `Brevo error ${response.status}. Check API key and verified sender.`;
+        body?.message || `Brevo error ${response.status}. Check API key and verified sender.`;
       console.error("Brevo email failed:", body);
       return { ok: false, error: message };
     }
 
-    console.info("Brevo email sent:", {
+    console.warn("Brevo email sent:", {
       messageId: body?.messageId,
       to: options.to,
     });
@@ -85,9 +79,7 @@ async function sendBrevoEmail(options: {
   }
 }
 
-export async function sendLeadNotification(
-  payload: LeadEmailPayload,
-): Promise<SendEmailResult> {
+export async function sendLeadNotification(payload: LeadEmailPayload): Promise<SendEmailResult> {
   const { inbox } = getBrevoConfig();
 
   const html = `
@@ -175,8 +167,7 @@ export async function sendDocumentsUploadedNotification(
   payload: DocumentsEmailPayload,
 ): Promise<SendEmailResult> {
   const { inbox } = getBrevoConfig();
-  const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://flyticketvisa.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://flyticketvisa.com";
 
   const typeLabel = documentTypeLabel(payload.documentType);
   const html = `

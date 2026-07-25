@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Check } from "lucide-react";
-import { CompactHero } from "@/components/CompactHero";
-import { LightSection } from "@/components/LightSection";
-import { CountryCard } from "@/components/CountryCard";
 import { CTABanner } from "@/components/CTABanner";
+import { CompactHero } from "@/components/CompactHero";
+import { CountryCard } from "@/components/CountryCard";
+import { LightSection } from "@/components/LightSection";
 import { SectionHeading } from "@/components/SectionHeading";
 import { buttonVariants } from "@/components/ui/button";
-import { getServiceBySlug, services } from "@/lib/services";
 import { getCountriesBySlugs } from "@/lib/data/countries";
+import { getServiceBySlug, services } from "@/lib/services";
 import { cn } from "@/lib/utils";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -17,6 +17,8 @@ type Props = { params: Promise<{ slug: string }> };
 export async function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
 }
+
+export const revalidate = 3600; // 1 hour
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -37,11 +39,7 @@ export default async function ServicePage({ params }: Props) {
 
   return (
     <>
-      <CompactHero
-        eyebrow="Visa service"
-        title={service.title}
-        description={service.description}
-      />
+      <CompactHero eyebrow="Visa service" title={service.title} description={service.description} />
 
       <LightSection>
         <div className="grid gap-12 md:grid-cols-2">
@@ -97,7 +95,10 @@ export default async function ServicePage({ params }: Props) {
             <div className="pointer-events-none absolute -right-4 bottom-0 top-0 z-10 w-8 bg-gradient-to-l from-background to-transparent sm:hidden" />
             <div className="-mx-4 flex gap-5 overflow-x-auto px-4 pb-4 snap-x snap-mandatory sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
               {related.map((country) => (
-                <div key={country.slug} className="w-[85vw] shrink-0 snap-start sm:w-auto sm:shrink">
+                <div
+                  key={country.slug}
+                  className="w-[85vw] shrink-0 snap-start sm:w-auto sm:shrink"
+                >
                   <CountryCard country={country} />
                 </div>
               ))}
@@ -121,13 +122,14 @@ export default async function ServicePage({ params }: Props) {
                 "malaysia",
                 "singapore",
                 "saudi-arabia",
-              ]).map(
-                (country) => (
-                  <div key={country.slug} className="w-[85vw] shrink-0 snap-start sm:w-auto sm:shrink">
-                    <CountryCard country={country} />
-                  </div>
-                ),
-              )}
+              ]).map((country) => (
+                <div
+                  key={country.slug}
+                  className="w-[85vw] shrink-0 snap-start sm:w-auto sm:shrink"
+                >
+                  <CountryCard country={country} />
+                </div>
+              ))}
             </div>
           </div>
         </LightSection>

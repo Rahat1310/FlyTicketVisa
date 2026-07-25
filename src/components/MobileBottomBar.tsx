@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, LayoutGrid, Globe, Phone } from "lucide-react";
+import { Globe, Home, LayoutGrid, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function MobileBottomBar() {
@@ -18,16 +18,17 @@ export function MobileBottomBar() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 flex items-center justify-around border-t border-border bg-card pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_16px_rgba(0,0,0,0.05)] lg:hidden">
       {navItems.map((item) => {
-        const isActive = pathname === item.href || (pathname.startsWith(item.href) && item.href !== "/");
+        const isActive =
+          pathname === item.href || (pathname.startsWith(item.href) && item.href !== "/");
         const Icon = item.icon;
-        
+
         return (
           <Link
             key={item.href}
             href={item.href}
             className={cn(
               "flex flex-1 flex-col items-center gap-1 py-3 text-[10px] font-medium transition-colors",
-              isActive ? "text-navy" : "text-muted-foreground hover:text-navy"
+              isActive ? "text-navy" : "text-muted-foreground hover:text-navy",
             )}
           >
             <Icon className={cn("size-5", isActive && "text-gold fill-gold/10")} />

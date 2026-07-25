@@ -1,6 +1,6 @@
+import { redirect } from "next/navigation";
 import { SignIn } from "@clerk/nextjs";
 import { isClerkConfigured } from "@/lib/auth";
-import { redirect } from "next/navigation";
 
 export default function SignInPage() {
   if (!isClerkConfigured()) {

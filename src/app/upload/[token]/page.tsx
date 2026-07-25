@@ -3,9 +3,9 @@ import Link from "next/link";
 import { CompactHero } from "@/components/CompactHero";
 import { LightSection } from "@/components/LightSection";
 import { UploadClient } from "@/components/UploadClient";
+import { buttonVariants } from "@/components/ui/button";
 import { getLeadByUploadToken } from "@/lib/auth";
 import { getChecklistSlots } from "@/lib/checklist";
-import { buttonVariants } from "@/components/ui/button";
 import { getWhatsAppUrl, siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 

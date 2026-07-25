@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { services } from "@/lib/services";
-import { ServiceCard } from "@/components/ServiceCard";
-import { FadeIn } from "@/components/Animations";
-import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { FadeIn } from "@/components/Animations";
+import { ServiceCard } from "@/components/ServiceCard";
+import { Button } from "@/components/ui/button";
+import { services } from "@/lib/services";
 import { cn } from "@/lib/utils";
 
 /** Canton Fair first so Facebook traffic sees it immediately in the grid */
@@ -45,7 +45,7 @@ export function ServiceGrid() {
         <div
           className={cn(
             "mt-10 flex justify-center",
-            orderedServices.length <= 6 && !isExpanded && "lg:hidden"
+            orderedServices.length <= 6 && !isExpanded && "lg:hidden",
           )}
         >
           <Button

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CompactHero } from "@/components/CompactHero";
 import { LightSection } from "@/components/LightSection";
-import { prisma } from "@/lib/db";
-import { isClerkConfigured } from "@/lib/auth";
 import { buttonVariants } from "@/components/ui/button";
+import { isClerkConfigured } from "@/lib/auth";
+import { prisma } from "@/lib/db";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -28,9 +28,9 @@ export default async function AdminPage() {
               {!isClerkConfigured() ? (
                 <>
                   Also add Clerk keys (
-                  <code className="text-xs">NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY</code>
-                  , <code className="text-xs">CLERK_SECRET_KEY</code>) to gate this
-                  area in production.
+                  <code className="text-xs">NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY</code>,{" "}
+                  <code className="text-xs">CLERK_SECRET_KEY</code>) to gate this area in
+                  production.
                 </>
               ) : (
                 <>Clerk is configured. Add DATABASE_URL to load leads.</>
@@ -60,8 +60,8 @@ export default async function AdminPage() {
       <LightSection>
         {!isClerkConfigured() ? (
           <p className="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-            Clerk keys are not set — this page is open in local/dev mode. Add Clerk
-            before deploying.
+            Clerk keys are not set — this page is open in local/dev mode. Add Clerk before
+            deploying.
           </p>
         ) : null}
 
@@ -90,9 +90,7 @@ export default async function AdminPage() {
                     <td className="px-4 py-3">
                       <div>{lead.service}</div>
                       {lead.country ? (
-                        <div className="text-xs text-muted-foreground">
-                          {lead.country}
-                        </div>
+                        <div className="text-xs text-muted-foreground">{lead.country}</div>
                       ) : null}
                     </td>
                     <td className="px-4 py-3 capitalize">{lead.status}</td>
@@ -103,9 +101,7 @@ export default async function AdminPage() {
                     <td className="px-4 py-3 text-right">
                       <Link
                         href={`/admin/leads/${lead.id}`}
-                        className={cn(
-                          buttonVariants({ size: "sm", variant: "outline" }),
-                        )}
+                        className={cn(buttonVariants({ size: "sm", variant: "outline" }))}
                       >
                         Open
                       </Link>

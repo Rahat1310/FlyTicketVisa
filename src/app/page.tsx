@@ -1,15 +1,14 @@
 import Link from "next/link";
 import { ArrowRight, Plane } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
-import { SiteImage } from "@/components/SiteImage";
-import { ServiceGrid } from "@/components/ServiceGrid";
-
-import { CountryGrid } from "@/components/CountryGrid";
-import { SectionHeading } from "@/components/SectionHeading";
-import { LightSection } from "@/components/LightSection";
-import { CTABanner } from "@/components/CTABanner";
-import { FeaturedHotSection } from "@/components/FeaturedHotSection";
 import { FadeIn, TypewriterGroup, TypewriterPart } from "@/components/Animations";
+import { CTABanner } from "@/components/CTABanner";
+import { CountryGrid } from "@/components/CountryGrid";
+import { FeaturedHotSection } from "@/components/FeaturedHotSection";
+import { LightSection } from "@/components/LightSection";
+import { SectionHeading } from "@/components/SectionHeading";
+import { ServiceGrid } from "@/components/ServiceGrid";
+import { SiteImage } from "@/components/SiteImage";
+import { buttonVariants } from "@/components/ui/button";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -35,8 +34,14 @@ export default function HomePage() {
         />
 
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
-          <Plane className="absolute top-[45%] left-0 h-24 w-24 animate-fly text-white/10 drop-shadow-xl" strokeWidth={1} />
-          <Plane className="absolute top-[7%] left-0 h-16 w-16 animate-fly-reverse text-white/10 drop-shadow-xl" strokeWidth={1} />
+          <Plane
+            className="absolute top-[45%] left-0 h-24 w-24 animate-fly text-white/10 drop-shadow-xl"
+            strokeWidth={1}
+          />
+          <Plane
+            className="absolute top-[7%] left-0 h-16 w-16 animate-fly-reverse text-white/10 drop-shadow-xl"
+            strokeWidth={1}
+          />
         </div>
 
         <div className="relative mx-auto flex min-h-full h-[70vh] md:h-auto md:min-h-[88vh] max-w-4xl items-center justify-center px-4 py-16 md:py-24 sm:px-6">
@@ -67,8 +72,8 @@ export default function HomePage() {
               </h1>
 
               <p className="animate-fade-up-delay-2 mx-auto mt-6 max-w-[32ch] md:max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
-                Student, tourist, business, medical, Umrah, and flights — clear documents,
-                honest timelines, and WhatsApp support.
+                Student, tourist, business, medical, Umrah, and flights — clear documents, honest
+                timelines, and WhatsApp support.
               </p>
 
               <div className="animate-fade-up-delay-3 mt-10 flex flex-col md:flex-row items-stretch md:items-center justify-center gap-3">
@@ -98,8 +103,6 @@ export default function HomePage() {
 
       <FeaturedHotSection />
 
-
-
       <LightSection id="services">
         <FadeIn>
           <SectionHeading
@@ -114,7 +117,11 @@ export default function HomePage() {
       </LightSection>
 
       <LightSection id="countries" bordered>
-        <FadeIn direction="up" delay={0.1} className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+        <FadeIn
+          direction="up"
+          delay={0.1}
+          className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
+        >
           <SectionHeading
             eyebrow="Priority destinations"
             title="Countries we help with most"

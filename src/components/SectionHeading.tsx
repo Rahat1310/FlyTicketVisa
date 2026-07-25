@@ -13,22 +13,18 @@ export function SectionHeading({ title, description, eyebrow }: SectionHeadingPr
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75"></span>
             <span className="relative inline-flex size-2 rounded-full bg-teal"></span>
           </span>
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-teal">
-            {eyebrow}
-          </span>
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-teal">{eyebrow}</span>
         </div>
       ) : null}
-      
+
       <h2 className="font-display text-4xl font-medium tracking-tight text-navy text-balance sm:text-5xl">
         {title}
       </h2>
-      
+
       {description ? (
         <div className="mt-6 flex items-center gap-5">
           <div className="h-px w-12 bg-teal/30" />
-          <p className="text-lg leading-relaxed text-muted-foreground max-w-xl">
-            {description}
-          </p>
+          <p className="text-lg leading-relaxed text-muted-foreground max-w-xl">{description}</p>
         </div>
       ) : null}
     </div>

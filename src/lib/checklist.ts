@@ -1,8 +1,5 @@
 import { countries } from "@/lib/data/countries";
-import {
-  DOCUMENT_TYPES,
-  type DocumentType,
-} from "@/lib/uploads";
+import { DOCUMENT_TYPES, type DocumentType } from "@/lib/uploads";
 
 export type ChecklistSlot = {
   id: string;

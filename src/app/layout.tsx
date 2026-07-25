@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { WhatsAppFloat } from "@/components/WhatsAppFloat";
-import { MobileBottomBar } from "@/components/MobileBottomBar";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { AppProviders } from "@/components/AppProviders";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { MobileBottomBar } from "@/components/MobileBottomBar";
+import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -19,9 +21,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://flyticketvisa.com",
-  ),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://flyticketvisa.com"),
   title: {
     default: `${siteConfig.name} | Visa & Air Ticket Agency Bangladesh`,
     template: `%s | ${siteConfig.name}`,
@@ -39,8 +39,6 @@ export const metadata: Metadata = {
     description: siteConfig.description,
   },
 };
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function RootLayout({
   children,

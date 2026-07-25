@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { ArrowRight, Flame } from "lucide-react";
+import { SiteImage } from "@/components/SiteImage";
 import type { Country } from "@/lib/data/countries";
 import { getCountryFlagUrl } from "@/lib/data/flags";
 import { cn } from "@/lib/utils";
-import { SiteImage } from "@/components/SiteImage";
 
 type CountryCardProps = {
   country: Country;

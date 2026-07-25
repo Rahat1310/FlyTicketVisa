@@ -1,0 +1,7 @@
+# Prettier ignore — don't format generated/vendored files
+.next/
+node_modules/
+out/
+build/
+public/
+*.lock

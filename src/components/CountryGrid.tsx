@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { countries } from "@/lib/data/countries";
-import { CountryCard } from "@/components/CountryCard";
-import { FadeIn } from "@/components/Animations";
-import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { FadeIn } from "@/components/Animations";
+import { CountryCard } from "@/components/CountryCard";
+import { Button } from "@/components/ui/button";
+import { countries } from "@/lib/data/countries";
 import { cn } from "@/lib/utils";
 
 export function CountryGrid({ limit }: { limit?: number }) {
@@ -39,7 +39,7 @@ export function CountryGrid({ limit }: { limit?: number }) {
         <div
           className={cn(
             "mt-10 flex flex-col items-center gap-4",
-            list.length <= 6 && !isExpanded && "sm:hidden"
+            list.length <= 6 && !isExpanded && "sm:hidden",
           )}
         >
           <Button

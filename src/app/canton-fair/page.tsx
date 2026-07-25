@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  Check,
-  Plane,
-  Hotel,
-  FileText,
-  BadgeCheck,
   ArrowRight,
+  BadgeCheck,
   Calendar,
+  Check,
   ChevronDown,
-  ShieldCheck,
   ClipboardList,
+  FileText,
   Globe,
+  Hotel,
   Package,
+  Plane,
+  ShieldCheck,
 } from "lucide-react";
 import { CTABanner } from "@/components/CTABanner";
 import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { getWhatsAppUrl } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Canton Fair Travel & Visa Assistance | China Import & Export Fair",
@@ -29,14 +29,12 @@ const phases = [
   {
     phase: "Phase 1",
     autumn: "Oct 15 – 19",
-    categories:
-      "Electronics, Home Appliances, Machinery, Hardware & Tools, EVs & Vehicles, Energy",
+    categories: "Electronics, Home Appliances, Machinery, Hardware & Tools, EVs & Vehicles, Energy",
   },
   {
     phase: "Phase 2",
     autumn: "Oct 23 – 27",
-    categories:
-      "Furniture, Home Décor, Ceramics, Kitchenware, Building Materials, Gifts & Crafts",
+    categories: "Furniture, Home Décor, Ceramics, Kitchenware, Building Materials, Gifts & Crafts",
   },
   {
     phase: "Phase 3",
@@ -107,10 +105,7 @@ const docGroups = [
     color: "from-blue-500/10 to-blue-500/5 border-blue-500/20",
     accent: "text-blue-600",
     checkColor: "text-blue-600",
-    items: [
-      "6-Month Bank Statement (company or personal)",
-      "Bank Solvency Certificate",
-    ],
+    items: ["6-Month Bank Statement (company or personal)", "Bank Solvency Certificate"],
   },
   {
     title: "Handled by Our Agency",
@@ -199,13 +194,12 @@ export default function CantonFairPage() {
             China Import &amp; Export Fair · Guangzhou
           </p>
           <h1 className="mt-4 max-w-4xl font-display text-6xl leading-tight text-balance">
-            Canton Fair Travel &amp;{" "}
-            <span className="text-gold">Visa Assistance</span>
+            Canton Fair Travel &amp; <span className="text-gold">Visa Assistance</span>
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
-            Your complete solution for Canton Fair — Official Invitation Letters, Chinese
-            Business M-Visa, flights to Guangzhou &amp; hotels near Pazhou Complex.
-            Autumn sessions. All handled end-to-end.
+            Your complete solution for Canton Fair — Official Invitation Letters, Chinese Business
+            M-Visa, flights to Guangzhou &amp; hotels near Pazhou Complex. Autumn sessions. All
+            handled end-to-end.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Link
@@ -237,10 +231,7 @@ export default function CantonFairPage() {
               "Guangzhou Hotel Packages",
               "Autumn Sessions",
             ].map((badge) => (
-              <div
-                key={badge}
-                className="flex items-center gap-2 text-sm text-white/60"
-              >
+              <div key={badge} className="flex items-center gap-2 text-sm text-white/60">
                 <Check className="size-4 text-teal" />
                 {badge}
               </div>
@@ -251,14 +242,8 @@ export default function CantonFairPage() {
 
       {/* ── SCHEDULE TABLE ── */}
       <section className="relative border-y border-border py-16 sm:py-20">
-        <div
-          className="pointer-events-none absolute inset-0 bg-section-atmosphere"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-section-pattern"
-          aria-hidden
-        />
+        <div className="pointer-events-none absolute inset-0 bg-section-atmosphere" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 bg-section-pattern" aria-hidden />
         <div className="relative container-fluid">
           <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-teal/10 bg-teal/5 px-4 py-2">
             <span className="relative flex size-2">
@@ -276,8 +261,8 @@ export default function CantonFairPage() {
                 Official Fair Timings
               </h2>
               <p className="mt-4 text-base text-muted-foreground">
-                The Canton Fair runs twice yearly across 3 sourcing phases. Select the
-                phase matching your product category.
+                The Canton Fair runs twice yearly across 3 sourcing phases. Select the phase
+                matching your product category.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 text-sm">
@@ -292,9 +277,7 @@ export default function CantonFairPage() {
               <table className="w-full min-w-[640px] text-sm">
                 <thead>
                   <tr className="border-b border-border bg-navy text-white">
-                    <th className="px-5 py-4 text-left font-semibold tracking-wide">
-                      Phase
-                    </th>
+                    <th className="px-5 py-4 text-left font-semibold tracking-wide">Phase</th>
                     <th className="px-5 py-4 text-left font-semibold tracking-wide">
                       <span className="flex items-center gap-2">
                         <Calendar className="size-3.5 text-gold" /> Autumn Dates
@@ -319,12 +302,8 @@ export default function CantonFairPage() {
                           {row.phase}
                         </span>
                       </td>
-                      <td className="px-5 py-4 font-medium text-[#b38e1e]">
-                        {row.autumn}
-                      </td>
-                      <td className="px-5 py-4 text-muted-foreground">
-                        {row.categories}
-                      </td>
+                      <td className="px-5 py-4 font-medium text-[#b38e1e]">{row.autumn}</td>
+                      <td className="px-5 py-4 text-muted-foreground">{row.categories}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -332,8 +311,8 @@ export default function CantonFairPage() {
             </div>
           </div>
           <p className="mt-4 text-xs text-muted-foreground">
-            * Dates are based on official Canton Fair schedules and subject to minor
-            adjustments. Contact us to confirm current session dates.
+            * Dates are based on official Canton Fair schedules and subject to minor adjustments.
+            Contact us to confirm current session dates.
           </p>
         </div>
       </section>
@@ -400,14 +379,8 @@ export default function CantonFairPage() {
 
       {/* ── DOCUMENT CHECKLIST ── */}
       <section className="relative border-y border-border py-16 sm:py-20">
-        <div
-          className="pointer-events-none absolute inset-0 bg-section-atmosphere"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-section-pattern"
-          aria-hidden
-        />
+        <div className="pointer-events-none absolute inset-0 bg-section-atmosphere" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 bg-section-pattern" aria-hidden />
         <div className="relative container-fluid">
           <div className="mb-8 inline-flex items-center gap-3 rounded-full border border-teal/10 bg-teal/5 px-4 py-2">
             <span className="relative flex size-2">
@@ -432,25 +405,15 @@ export default function CantonFairPage() {
             {docGroups.map((group) => (
               <div
                 key={group.title}
-                className={cn(
-                  "rounded-2xl border bg-gradient-to-br p-6",
-                  group.color,
-                )}
+                className={cn("rounded-2xl border bg-gradient-to-br p-6", group.color)}
               >
-                <h3
-                  className={cn(
-                    "mb-4 font-display text-lg font-semibold",
-                    group.accent,
-                  )}
-                >
+                <h3 className={cn("mb-4 font-display text-lg font-semibold", group.accent)}>
                   {group.title}
                 </h3>
                 <ul className="space-y-3">
                   {group.items.map((item) => (
                     <li key={item} className="flex gap-3 text-sm text-navy/80">
-                      <Check
-                        className={cn("mt-0.5 size-4 shrink-0", group.checkColor)}
-                      />
+                      <Check className={cn("mt-0.5 size-4 shrink-0", group.checkColor)} />
                       {item}
                     </li>
                   ))}
@@ -460,9 +423,9 @@ export default function CantonFairPage() {
           </div>
 
           <div className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-sm text-amber-800">
-            <strong>Note:</strong> Document requirements may vary by individual profile.
-            Our team reviews every application and advises on any additional supporting
-            documents before submission.
+            <strong>Note:</strong> Document requirements may vary by individual profile. Our team
+            reviews every application and advises on any additional supporting documents before
+            submission.
           </div>
         </div>
       </section>
@@ -475,9 +438,7 @@ export default function CantonFairPage() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75" />
               <span className="relative inline-flex size-2 rounded-full bg-teal" />
             </span>
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-teal">
-              Process
-            </span>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-teal">Process</span>
           </div>
           <h2 className="font-display text-5xl font-medium tracking-tight text-navy">
             How It Works
@@ -525,14 +486,8 @@ export default function CantonFairPage() {
 
       {/* ── FAQ ── */}
       <section className="relative border-y border-border py-16 sm:py-20">
-        <div
-          className="pointer-events-none absolute inset-0 bg-section-atmosphere"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-section-pattern"
-          aria-hidden
-        />
+        <div className="pointer-events-none absolute inset-0 bg-section-atmosphere" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 bg-section-pattern" aria-hidden />
         <div className="relative container-fluid">
           <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
             <div>
@@ -541,9 +496,7 @@ export default function CantonFairPage() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal opacity-75" />
                   <span className="relative inline-flex size-2 rounded-full bg-teal" />
                 </span>
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-teal">
-                  FAQ
-                </span>
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-teal">FAQ</span>
               </div>
               <h2 className="font-display text-5xl font-medium tracking-tight text-navy">
                 Common Questions

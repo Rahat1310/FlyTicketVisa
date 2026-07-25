@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import { BadgeCheck, Building2, HeartHandshake, Scale } from "lucide-react";
+import { CTABanner } from "@/components/CTABanner";
 import { CompactHero } from "@/components/CompactHero";
 import { LightSection } from "@/components/LightSection";
-import { CTABanner } from "@/components/CTABanner";
 import { SectionHeading } from "@/components/SectionHeading";
 import { siteConfig } from "@/lib/site";
-import { BadgeCheck, Building2, HeartHandshake, Scale } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About & Trust",
@@ -52,17 +52,14 @@ export default function AboutPage() {
         />
         <div className="mt-8 max-w-3xl space-y-4 text-base leading-relaxed text-muted-foreground">
           <p>
-            {siteConfig.name} focuses on transparent guidance for students, tourists,
-            business travelers, medical patients, and Umrah pilgrims. We start with a
-            checklist, confirm fees upfront, and stay reachable on WhatsApp until your
-            case moves forward.
+            {siteConfig.name} focuses on transparent guidance for students, tourists, business
+            travelers, medical patients, and Umrah pilgrims. We start with a checklist, confirm fees
+            upfront, and stay reachable on WhatsApp until your case moves forward.
           </p>
           <p>
-            License numbers below are placeholders until you confirm ATAB, trade license,
-            and IATA details in{" "}
-            <code className="rounded bg-mist px-1.5 py-0.5 text-xs text-navy">
-              src/lib/site.ts
-            </code>
+            License numbers below are placeholders until you confirm ATAB, trade license, and IATA
+            details in{" "}
+            <code className="rounded bg-mist px-1.5 py-0.5 text-xs text-navy">src/lib/site.ts</code>
             .
           </p>
         </div>
@@ -75,9 +72,7 @@ export default function AboutPage() {
             >
               <item.icon className="size-6 text-teal" strokeWidth={1.5} />
               <h3 className="mt-4 font-display text-xl text-navy">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {item.body}
-              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.body}</p>
             </div>
           ))}
         </div>
@@ -86,11 +81,7 @@ export default function AboutPage() {
       <LightSection bordered>
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
-            <SectionHeading
-              eyebrow="Visit us"
-              title="Our office"
-              description={siteConfig.hours}
-            />
+            <SectionHeading eyebrow="Visit us" title="Our office" description={siteConfig.hours} />
             <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
               {siteConfig.address.lines.map((line) => (
                 <span key={line} className="block">
@@ -100,7 +91,10 @@ export default function AboutPage() {
             </p>
             <p className="mt-4 text-sm text-muted-foreground">
               Phone:{" "}
-              <a href={siteConfig.phoneHref} className="inline-flex min-h-[44px] items-center font-medium text-teal">
+              <a
+                href={siteConfig.phoneHref}
+                className="inline-flex min-h-[44px] items-center font-medium text-teal"
+              >
                 {siteConfig.phone}
               </a>
             </p>

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { CompactHero } from "@/components/CompactHero";
-import { LightSection } from "@/components/LightSection";
-import { CountryGrid } from "@/components/CountryGrid";
 import { CTABanner } from "@/components/CTABanner";
+import { CompactHero } from "@/components/CompactHero";
+import { CountryGrid } from "@/components/CountryGrid";
+import { LightSection } from "@/components/LightSection";
 import { SectionHeading } from "@/components/SectionHeading";
 
 export const metadata: Metadata = {

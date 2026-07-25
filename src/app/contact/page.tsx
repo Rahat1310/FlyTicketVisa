@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { CompactHero } from "@/components/CompactHero";
 import { InquiryForm } from "@/components/InquiryForm";
 import { LightSection } from "@/components/LightSection";
-import { siteConfig, getWhatsAppUrl } from "@/lib/site";
-import { MessageCircle, Phone, MapPin, Mail } from "lucide-react";
+import { getWhatsAppUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact / Inquiry",

@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Check, Clock, Banknote, Flame } from "lucide-react";
-import { LightSection } from "@/components/LightSection";
+import { Banknote, Check, Clock, Flame } from "lucide-react";
 import { CTABanner } from "@/components/CTABanner";
 import { CountryCard } from "@/components/CountryCard";
-import { getCountryFlagUrl } from "@/lib/data/flags";
-import { countries, getCountryBySlug } from "@/lib/data/countries";
+import { LightSection } from "@/components/LightSection";
+import { SiteImage } from "@/components/SiteImage";
 import { buttonVariants } from "@/components/ui/button";
+import { countries, getCountryBySlug } from "@/lib/data/countries";
+import { getCountryFlagUrl } from "@/lib/data/flags";
 import { cn } from "@/lib/utils";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -15,6 +16,8 @@ type Props = { params: Promise<{ slug: string }> };
 export async function generateStaticParams() {
   return countries.map((c) => ({ slug: c.slug }));
 }
+
+export const revalidate = 3600; // 1 hour
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -80,11 +83,7 @@ export default async function CountryPage({ params }: Props) {
       l.includes("form")
     ) {
       groups.personal.items.push(doc);
-    } else if (
-      l.includes("solvency") ||
-      l.includes("bank") ||
-      l.includes("financial")
-    ) {
+    } else if (l.includes("solvency") || l.includes("bank") || l.includes("financial")) {
       groups.financial.items.push(doc);
     } else if (
       l.includes("trade") ||
@@ -109,7 +108,10 @@ export default async function CountryPage({ params }: Props) {
   return (
     <>
       <section className="relative overflow-hidden bg-hero-atmosphere pb-14 pt-24 text-white sm:pb-16 sm:pt-28">
-        <div className="pointer-events-none absolute inset-0 bg-section-pattern-dark opacity-60" aria-hidden />
+        <div
+          className="pointer-events-none absolute inset-0 bg-section-pattern-dark opacity-60"
+          aria-hidden
+        />
         <div className="relative container-fluid">
           <div className="flex flex-wrap items-center gap-2">
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-white/55">
@@ -129,16 +131,17 @@ export default async function CountryPage({ params }: Props) {
                 isChina ? "border-gold/50" : "border-white/20",
               )}
             >
-              <img
+              <SiteImage
                 src={getCountryFlagUrl(country.slug)}
                 alt={`${country.name} flag`}
-                className="h-full w-full object-cover"
+                fill
+                priority
+                sizes="80px"
+                className="object-cover"
               />
             </div>
             <div>
-              <h1 className="font-display text-5xl">
-                {country.name}
-              </h1>
+              <h1 className="font-display text-5xl">{country.name}</h1>
               <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/70">
                 {country.summary}
               </p>
@@ -192,25 +195,15 @@ export default async function CountryPage({ params }: Props) {
             {docGroups.map((group) => (
               <div
                 key={group.title}
-                className={cn(
-                  "rounded-xl border bg-gradient-to-br p-5 shadow-sm",
-                  group.color,
-                )}
+                className={cn("rounded-xl border bg-gradient-to-br p-5 shadow-sm", group.color)}
               >
-                <h3
-                  className={cn(
-                    "mb-3 font-display text-base font-semibold",
-                    group.accent,
-                  )}
-                >
+                <h3 className={cn("mb-3 font-display text-base font-semibold", group.accent)}>
                   {group.title}
                 </h3>
                 <ul className="space-y-2.5">
                   {group.items.map((item) => (
                     <li key={item} className="flex gap-3 text-sm text-navy/80">
-                      <Check
-                        className={cn("mt-0.5 size-4 shrink-0", group.checkColor)}
-                      />
+                      <Check className={cn("mt-0.5 size-4 shrink-0", group.checkColor)} />
                       <span className="leading-relaxed">{item}</span>
                     </li>
                   ))}
@@ -221,12 +214,10 @@ export default async function CountryPage({ params }: Props) {
           <div>
             <div className="rounded-2xl border border-border bg-card p-6 sm:p-8">
               <h2 className="font-display text-2xl text-navy">Important notes</h2>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{country.notes}</p>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                {country.notes}
-              </p>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                Embassy rules change. We always reconfirm the latest checklist and fee
-                before your application is submitted.
+                Embassy rules change. We always reconfirm the latest checklist and fee before your
+                application is submitted.
               </p>
               <Link
                 href={applyHref}
