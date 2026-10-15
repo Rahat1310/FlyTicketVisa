@@ -4,12 +4,14 @@ import { CompactHero } from "@/components/CompactHero";
 import { CountryGrid } from "@/components/CountryGrid";
 import { LightSection } from "@/components/LightSection";
 import { SectionHeading } from "@/components/SectionHeading";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/countries",
   title: "Countries We Serve",
   description:
     "Visa support for Bangladeshi applicants — China, India, Thailand, Malaysia, Singapore, Africa, Saudi Arabia, Egypt, Hong Kong, Turkey, Indonesia, Philippines, South Korea, Japan, and America.",
-};
+});
 
 export default function CountriesIndexPage() {
   return (

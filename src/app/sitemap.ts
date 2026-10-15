@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { countries } from "@/lib/data/countries";
 import { services } from "@/lib/services";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://flyticketvisa.com";
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://flyvisapoints.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = ["", "/about", "/contact", "/testimonials", "/services", "/countries"].map(

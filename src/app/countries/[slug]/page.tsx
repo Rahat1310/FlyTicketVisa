@@ -9,6 +9,7 @@ import { SiteImage } from "@/components/SiteImage";
 import { buttonVariants } from "@/components/ui/button";
 import { countries, getCountryBySlug } from "@/lib/data/countries";
 import { getCountryFlagUrl } from "@/lib/data/flags";
+import { createPageMetadata } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -23,10 +24,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const country = getCountryBySlug(slug);
   if (!country) return {};
-  return {
+  return createPageMetadata({
+    path: `/countries/${country.slug}`,
     title: `${country.name} Visa from Bangladesh`,
     description: country.summary,
-  };
+  });
 }
 
 export default async function CountryPage({ params }: Props) {

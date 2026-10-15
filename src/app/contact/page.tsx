@@ -3,13 +3,15 @@ import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { CompactHero } from "@/components/CompactHero";
 import { InquiryForm } from "@/components/InquiryForm";
 import { LightSection } from "@/components/LightSection";
+import { createPageMetadata } from "@/lib/metadata";
 import { getWhatsAppUrl, siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/contact",
   title: "Contact / Inquiry",
   description:
     "Send a visa or air ticket inquiry. Reach us on WhatsApp, phone, or visit our office.",
-};
+});
 
 type Props = {
   searchParams: Promise<{ service?: string; country?: string; countrySlug?: string }>;

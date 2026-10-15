@@ -4,13 +4,15 @@ import { CTABanner } from "@/components/CTABanner";
 import { CompactHero } from "@/components/CompactHero";
 import { LightSection } from "@/components/LightSection";
 import { SectionHeading } from "@/components/SectionHeading";
+import { createPageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/about",
   title: "About & Trust",
   description:
     "Learn about our visa and air ticket agency in Bangladesh — licenses, ATAB membership, office, and how we work.",
-};
+});
 
 const trustItems = [
   {

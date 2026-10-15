@@ -9,6 +9,7 @@ import { LightSection } from "@/components/LightSection";
 import { SectionHeading } from "@/components/SectionHeading";
 import { buttonVariants } from "@/components/ui/button";
 import { getCountriesBySlugs } from "@/lib/data/countries";
+import { createPageMetadata } from "@/lib/metadata";
 import { getServiceBySlug, services } from "@/lib/services";
 import { cn } from "@/lib/utils";
 
@@ -24,10 +25,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const service = getServiceBySlug(slug);
   if (!service) return {};
-  return {
+  return createPageMetadata({
+    path: `/services/${service.slug}`,
     title: service.title,
     description: service.summary,
-  };
+  });
 }
 
 export default async function ServicePage({ params }: Props) {

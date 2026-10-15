@@ -167,7 +167,7 @@ export async function sendDocumentsUploadedNotification(
   payload: DocumentsEmailPayload,
 ): Promise<SendEmailResult> {
   const { inbox } = getBrevoConfig();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://flyticketvisa.com";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://flyvisapoints.com";
 
   const typeLabel = documentTypeLabel(payload.documentType);
   const html = `

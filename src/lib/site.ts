@@ -23,6 +23,14 @@ export const siteConfig = {
   hours: "Sat–Thu · 10:00 AM – 7:00 PM",
   /** Full Cloudinary URL used as the home hero background */
   heroImageUrl: "https://res.cloudinary.com/blvrawlp/image/upload/v1784738490/hero_visa_pmfnzz.png",
+  /** Public JPEG of the homepage image, sized for shared-link preview cards. */
+  socialImage: {
+    url: "https://res.cloudinary.com/blvrawlp/image/upload/c_fill,w_1200,h_630,f_jpg,q_auto/v1784738490/hero_visa_pmfnzz.png",
+    width: 1200,
+    height: 630,
+    type: "image/jpeg",
+    alt: "Fly & Visa point visa and air ticket travel services from Bangladesh",
+  },
 } as const;
 
 export function getWhatsAppUrl(customMessage?: string) {

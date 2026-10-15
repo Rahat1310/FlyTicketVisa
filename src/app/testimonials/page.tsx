@@ -3,11 +3,13 @@ import { CTABanner } from "@/components/CTABanner";
 import { CompactHero } from "@/components/CompactHero";
 import { LightSection } from "@/components/LightSection";
 import { TestimonialList } from "@/components/TestimonialList";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/testimonials",
   title: "Testimonials",
   description: "What clients say about our visa processing and air ticket support from Bangladesh.",
-};
+});
 
 export default function TestimonialsPage() {
   return (

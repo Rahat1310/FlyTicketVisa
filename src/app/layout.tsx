@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { MobileBottomBar } from "@/components/MobileBottomBar";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { createPageMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
@@ -21,22 +22,15 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://flyticketvisa.com"),
+  ...createPageMetadata({
+    title: `${siteConfig.name} | Visa & Air Ticket Agency Bangladesh`,
+    description: siteConfig.description,
+    path: "/",
+  }),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://flyvisapoints.com"),
   title: {
     default: `${siteConfig.name} | Visa & Air Ticket Agency Bangladesh`,
     template: `%s | ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-  openGraph: {
-    title: `${siteConfig.name} | Visa & Air Ticket Agency Bangladesh`,
-    description: siteConfig.description,
-    locale: "en_BD",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${siteConfig.name}`,
-    description: siteConfig.description,
   },
 };
 

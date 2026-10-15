@@ -4,12 +4,14 @@ import { CompactHero } from "@/components/CompactHero";
 import { LightSection } from "@/components/LightSection";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ServiceGrid } from "@/components/ServiceGrid";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/services",
   title: "Visa & Travel Services",
   description:
     "Umrah packages, student, tourist, business, and medical visas, plus air tickets — from Bangladesh.",
-};
+});
 
 export default function ServicesIndexPage() {
   return (

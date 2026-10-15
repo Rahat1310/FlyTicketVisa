@@ -16,14 +16,16 @@ import {
 } from "lucide-react";
 import { CTABanner } from "@/components/CTABanner";
 import { buttonVariants } from "@/components/ui/button";
+import { createPageMetadata } from "@/lib/metadata";
 import { getWhatsAppUrl } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
+  path: "/canton-fair",
   title: "Canton Fair Travel & Visa Assistance | China Import & Export Fair",
   description:
     "Complete Canton Fair travel packages — Official Invitation Letters, Chinese Business M-Visa, flights to Guangzhou, and hotel bookings near Pazhou Complex. Autumn sessions covered.",
-};
+});
 
 const phases = [
   {
